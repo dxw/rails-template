@@ -1,4 +1,14 @@
+# Using this template
+
+Search for `TODO` across the project to customise the template to a project
+
+TODO: Remove this section from the README once complete
+
+---
+
 # Rails Template
+
+TODO: replace README header with project name
 
 TODO: Add a summary of who the application is for and what it will do.
 
