@@ -45,6 +45,7 @@ group :development, :test do
   gem 'dxw-utils', git: 'https://github.com/dxw/dxw-utils'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'pry'
   gem 'rspec-rails'
 end
 
