@@ -24,7 +24,7 @@ group :test do
   gem 'chromedriver-helper'
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap'
+gem 'bootstrap', '>= 4.3.1'
 gem 'haml-rails'
 gem 'high_voltage'
 gem 'jquery-rails'
