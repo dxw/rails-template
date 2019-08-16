@@ -20,6 +20,10 @@ TODO: Add getting started steps
 
 TODO: Add testing instructions
 
+## Architecture decision records
+
+We use ADRs to document architectural decisions that we make. They can be found in doc/architecture/decisions and contributed to with the [adr-tools](https://github.com/npryce/adr-tools).
+
 ## Access
 
 TODO: Where can people find the service and the different environments?
