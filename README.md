@@ -16,6 +16,8 @@ TODO: Add a summary of who the application is for and what it will do.
 
 TODO: Add getting started steps
 
+We use Docker by default
+
 ## Running the tests
 
 TODO: Add testing instructions
