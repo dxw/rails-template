@@ -24,9 +24,22 @@ TODO: Add getting started steps
 
 TODO: Add testing instructions
 
+## Making changes
+
+When making a change, update the [changelog](CHANGELOG.md) using the
+[Keep a Changelog 1.0.0](https://keepachangelog.com/en/1.0.0/) format. Pull
+requests should not be merged before any relevant updates are made.
+
+## Releasing changes
+
+When making a new release, update the [changelog](CHANGELOG.md) in the release
+pull request.
+
 ## Architecture decision records
 
-We use ADRs to document architectural decisions that we make. They can be found in doc/architecture/decisions and contributed to with the [adr-tools](https://github.com/npryce/adr-tools).
+We use ADRs to document architectural decisions that we make. They can be found
+in doc/architecture/decisions and contributed to with the
+[adr-tools](https://github.com/npryce/adr-tools).
 
 ## Managing environment variables
 
@@ -45,4 +58,5 @@ TODO: Where can people find the service and the different environments?
 
 ## Source
 
-This repository was bootstrapped from [dxw's `rails-template`](https://github.com/dxw/rails-template).
+This repository was bootstrapped from
+[dxw's `rails-template`](https://github.com/dxw/rails-template).
