@@ -3,7 +3,7 @@ default: &default
   url: <%= ENV["DATABASE_URL"] %>
   encoding: unicode
   template: template0
-  pool: 5
+  pool: <%= Integer(ENV.fetch('RAILS_MAX_THREADS') { 5 }) %>
 
 development:
   <<: *default
