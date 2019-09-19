@@ -85,3 +85,5 @@ pickle-email-*.html
 
 # Remove the master key added in Rails 5.2 incase it is used
 config/master.key
+
+.env

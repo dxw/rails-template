@@ -14,6 +14,8 @@ TODO: Add a summary of who the application is for and what it will do.
 
 ## Getting started
 
+1. copy `/.env.example` into a new file called `/.env`
+
 TODO: Add getting started steps
 
 ## Running the tests
