@@ -1,29 +1,20 @@
-development:
-  adapter:  postgresql
-  host:     localhost
+default: &default
+  adapter: postgresql
+  host: localhost
   encoding: unicode
-  database: rails-template_development
-  pool:     5
+  pool: 5
   username: rails-template
   password:
   template: template0
+
+development:
+  <<: *default
+  database: rails-template_development
 
 test:
-  adapter:  postgresql
-  host:     localhost
-  encoding: unicode
+  <<: *default
   database: rails-template_test
-  pool:     5
-  username: rails-template
-  password:
-  template: template0
 
 production:
-  adapter:  postgresql
-  host:     localhost
-  encoding: unicode
+  <<: *default
   database: rails-template_production
-  pool:     5
-  username: rails-template
-  password:
-  template: template0
