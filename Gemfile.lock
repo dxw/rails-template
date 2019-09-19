@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/dxw/dxw-utils
-  revision: f3e4941c7c2bc5a2dfd1cab35531932373334158
-  specs:
-    dxw-utils (0.1.1)
-      rubocop (~> 0.58)
-      rubocop-rspec (~> 1.29)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -248,8 +240,6 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-performance (1.4.1)
       rubocop (>= 0.71.0)
-    rubocop-rspec (1.35.0)
-      rubocop (>= 0.60.0)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     ruby_parser (3.13.1)
@@ -323,7 +313,6 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 5.0)
   database_cleaner
-  dxw-utils!
   factory_bot_rails
   faker
   haml-rails
