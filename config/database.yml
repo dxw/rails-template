@@ -1,20 +1,15 @@
 default: &default
   adapter: postgresql
-  host: localhost
+  url: <%= ENV["DATABASE_URL"] %>
   encoding: unicode
-  pool: 5
-  username: rails-template
-  password:
   template: template0
+  pool: 5
 
 development:
   <<: *default
-  database: rails-template_development
 
 test:
   <<: *default
-  database: rails-template_test
 
 production:
   <<: *default
-  database: rails-template_production
