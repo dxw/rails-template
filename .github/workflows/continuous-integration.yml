@@ -1,4 +1,4 @@
-name: Test
+name: CI
 
 on: pull_request
 
@@ -6,23 +6,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-ruby@v1
-      with:
-        ruby-version: '2.6.3'
-    - name: Install Postgres dependencies
-      run: |
-        sudo apt-get install libpq-dev
-    - name: Set up Postgres
-      run: |
-        docker run -d --name postgres -e POSTGRES_USER=rails-template -p 5432:5432 postgres:11
-    - name: Install dependencies
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-    - name: Set up the test database
-      run: |
-        RAILS_ENV=test bundle exec rake db:setup
-    - name: Run the tests
-      run: |
-        bundle exec rake
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.6.3"
+      - name: Set up Postgres
+        run: |
+          docker run -d --name postgres -e POSTGRES_USER=rails-template -p 5432:5432 postgres:11
+      - name: Install dependencies
+        run: |
+          sudo apt-get install libpq-dev
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: Set up the test database
+        run: |
+          RAILS_ENV=test bundle exec rake db:setup
+      - name: Run the tests
+        run: |
+          bundle exec rake
