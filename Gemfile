@@ -45,7 +45,6 @@ group :development, :test do
   gem "bullet"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "dotenv-rails"
-  gem "dxw-utils", git: "https://github.com/dxw/dxw-utils"
   gem "factory_bot_rails"
   gem "faker"
   gem "pry"
