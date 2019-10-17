@@ -44,6 +44,7 @@ end
 group :development, :test do
   gem "bullet"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "faker"
   gem "pry"

@@ -21,6 +21,8 @@ db/*.sqlite3
 /log/*
 /tmp/*
 
+
+
 # add /config/database.yml if it contains passwords
 # /config/database.yml
 
@@ -85,3 +87,7 @@ pickle-email-*.html
 
 # Remove the master key added in Rails 5.2 incase it is used
 config/master.key
+
+.env.*
+!.env.example
+!.env.test
