@@ -22,7 +22,7 @@ module RailsTemplate
     end
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 6.0
 
     # Make sure the `form_with` helper generates local forms, instead of defaulting
     # to remote and unobtrusive XHR forms
