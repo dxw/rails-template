@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Cache Docker layers
+        id: cache-docker-layers
+        uses: actions/cache@v1
+        with:
+          path: /var/lib/docker/aufs/layers
+          key: ${{ runner.os }}-docker-layers
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: "2.6.3"
