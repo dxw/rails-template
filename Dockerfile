@@ -36,6 +36,11 @@ COPY . $INSTALL_PATH
 
 RUN RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE="super secret" bundle exec rake assets:precompile --quiet
 
+# db setup
+COPY ./docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 EXPOSE 3000
 
 CMD ["rails", "server"]
