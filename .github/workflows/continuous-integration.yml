@@ -26,7 +26,5 @@ jobs:
             -e DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true \
             -e DATABASE_URL=postgres://test@pg:5432/app_test \
             app:test /bin/bash -c "tail -f /dev/null"
-      - name: Set up the test database
-        run: docker exec test-container rake db:setup
       - name: Run the tests
         run: docker exec test-container rake
