@@ -1,3 +1,5 @@
+# TODO: Enable GitHub Actions on the repository to test all pull requests
+# https://github.com/<org>/<repo>/actions
 name: CI
 
 on: pull_request
@@ -7,34 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
-    services:
-      postgres:
-        image: postgres:10.8
-        env:
-          POSTGRES_USER: test
-          POSTGRES_DB: postgres
-        ports:
-        - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - uses: actions/checkout@v1
-      - name: Set Ruby version to use
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up Docker
+        run: docker network create test
+      - name: Set up Postgres
+        run: docker run -d --name pg --network test -e POSTGRES_USER=test -p 5432:5432 postgres:11
+      - name: Build a new Docker image
+        run: docker build . --build-arg RAILS_ENV=test -t app:test
+      - name: Set up a new container for testing
         run: |
-          echo "::set-env name=RUBY_VERSION::$(cat .ruby-version)"
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-      - name: Install dependencies
-        run: |
-          sudo apt-get install libpq-dev
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+          docker run -d --name test-container \
+            --network test \
+            -e RAILS_ENV=test \
+            -e DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true \
+            -e DATABASE_URL=postgres://test@pg:5432/app_test \
+            app:test /bin/bash -c "tail -f /dev/null"
       - name: Set up the test database
-        run: |
-          RAILS_ENV=test bundle exec rake db:setup
+        run: docker exec test-container rake db:setup
       - name: Run the tests
-        run: |
-          bundle exec rake
-      - name: Brakeman action
-        uses: artplan1/brakeman-action@v1.2.1
+        run: docker exec test-container bundle exec rake
