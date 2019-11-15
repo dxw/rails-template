@@ -8,6 +8,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# TODO: Name the application
 module RailsTemplate
   class Application < Rails::Application
     config.generators do |g|
