@@ -5,6 +5,18 @@ on: pull_request
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: test
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v1
       - name: Set Ruby version to use
@@ -13,9 +25,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-      - name: Set up Postgres
-        run: |
-          docker run -d --name postgres -e POSTGRES_USER=test -p 5432:5432 postgres:11
       - name: Install dependencies
         run: |
           sudo apt-get install libpq-dev
