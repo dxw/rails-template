@@ -7,9 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Set Ruby version to use
+        run: |
+          echo "::set-env name=RUBY_VERSION::$(cat .ruby-version)"
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.3
+          ruby-version: ${{ env.RUBY_VERSION }}
       - name: Set up Postgres
         run: |
           docker run -d --name postgres -e POSTGRES_USER=test -p 5432:5432 postgres:11
