@@ -246,7 +246,7 @@ GEM
     ruby-progressbar (1.10.1)
     ruby_parser (3.14.0)
       sexp_processor (~> 4.9)
-    rubyzip (2.0.0)
+    rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.3.0)
@@ -257,7 +257,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    selenium-webdriver (3.142.6)
+    selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     sexp_processor (4.13.0)
