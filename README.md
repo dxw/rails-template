@@ -1,6 +1,10 @@
 # Using this template
 
-Search for `TODO` across the project to customise the template to a project
+1. Search for `TODO` across the repository to customise the template to the new
+  project
+1. Be aware of [dxw RFCs](https://github.com/dxw/tech-team-rfcs), especially
+  those that have not resulted in a default code change in this repository:
+  - [rfc-013-use-docker-to-deploy-and-run-applications-in-containers](https://github.com/dxw/tech-team-rfcs/blob/master/rfc-013-use-docker-to-deploy-and-run-applications-in-containers.md)
 
 TODO: Remove this section from the README once complete
 
