@@ -28,6 +28,18 @@ TODO: Add getting started steps
 
 TODO: Add testing instructions
 
+## Running Brakeman
+
+Run [Brakeman](https://brakemanscanner.org/) to highlight any security vulnerabilities:
+```bash
+brakeman
+```
+
+To pipe the results to a file:
+```bash
+brakeman -o report.text
+```
+
 ## Making changes
 
 When making a change, update the [changelog](CHANGELOG.md) using the

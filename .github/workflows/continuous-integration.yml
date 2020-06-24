@@ -36,3 +36,5 @@ jobs:
       - name: Run the tests
         run: |
           bundle exec rake
+      - name: Brakeman action
+        uses: artplan1/brakeman-action@v1.2.1
