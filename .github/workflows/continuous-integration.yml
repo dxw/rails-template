@@ -18,15 +18,11 @@ jobs:
         run: docker run -d --name pg --network test -e POSTGRES_USER=test -p 5432:5432 postgres:11
       - name: Build a new Docker image
         run: docker build . --build-arg RAILS_ENV=test -t app:test
-      - name: Set up a new container for testing
+      - name: Run the tests
         run: |
-          docker run -d --name test-container \
+          docker run --name test-container \
             --network test \
             -e RAILS_ENV=test \
             -e DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true \
             -e DATABASE_URL=postgres://test@pg:5432/app_test \
-            app:test /bin/bash -c "tail -f /dev/null"
-      - name: Set up the test database
-        run: docker exec test-container rake db:setup
-      - name: Run the tests
-        run: docker exec test-container bundle exec rake
+            app:test bundle exec rake
