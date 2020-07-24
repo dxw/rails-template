@@ -15,7 +15,7 @@ jobs:
       - name: Set up Docker
         run: docker network create test
       - name: Set up Postgres
-        run: docker run -d --name pg --network test -e POSTGRES_USER=test -p 5432:5432 postgres:11
+        run: docker run -d --name pg --network test -e POSTGRES_USER=test -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 postgres:11
       - name: Build a new Docker image
         run: docker build . --build-arg RAILS_ENV=test -t app:test
       - name: Run the tests
