@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# script/console: Launch a console for the application. Optionally pass in an
+#                 environment name to connect to a console for that environment.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+ENVIRONMENT=$1
+
+if [ -n "$ENVIRONMENT" ]; then
+  case "$ENVIRONMENT" in
+    *)
+      echo "Unknown environment '$ENVIRONMENT'"
+      exit 1
+      ;;
+  esac
+else
+  echo "==> Updating..."
+  script/update
+
+  echo "==> Starting a local Rails console..."
+  bundle exec rails console
+fi

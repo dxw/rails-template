@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# script/server: Launch the application and any extra required processes
+#                locally.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Updating..."
+script/update
+
+echo "==> Starting the development server..."
+bundle exec rails server
