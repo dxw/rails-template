@@ -19,19 +19,31 @@ TODO: Add a summary of who the application is for and what it will do.
 
 ## Getting started
 
-1. copy `/.env.example` into `/.env.development.local`.
+Run the setup script:
 
-   Our intention is that the example should include enough to get the
-   application started quickly. If this is not the case, please ask another
-   developer for a copy of their `/.env.development.local` file.
+```bash
+script/setup
+```
 
-TODO: Add getting started steps
+Run the tests:
 
-## Running the tests
+```bash
+script/test
+```
 
-TODO: Add testing instructions
+Start the server:
 
-## Running Brakeman
+```bash
+script/server
+```
+
+Start a console:
+
+```bash
+script/console
+```
+
+## Static code analysis
 
 Run [Brakeman](https://brakemanscanner.org/) to highlight any security
 vulnerabilities:
