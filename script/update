@@ -11,3 +11,6 @@ script/bootstrap
 
 echo "==> Running database migrations..."
 bundle exec rails db:migrate
+
+echo "==> Running test database migrations..."
+RAILS_ENV="test" bundle exec rails db:migrate

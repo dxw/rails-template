@@ -1,4 +1,4 @@
-# 10. User ESLint
+# 10. Use ESLint
 
 Date: 2020-10-19
 
