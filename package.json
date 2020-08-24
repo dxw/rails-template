@@ -1,5 +1,12 @@
 {
   "name": "rails-template",
   "private": true,
-  "dependencies": {}
+  "scripts": {
+    "lint:format": "prettier --check '**/*'",
+    "lint:format:fix": "prettier --write '**/*'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
 }
