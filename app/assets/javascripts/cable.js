@@ -8,5 +8,5 @@
 (function () {
   this.App || (this.App = {});
 
-  App.cable = ActionCable.createConsumer();
+  this.App.cable = this.ActionCable.createConsumer();
 }.call(this));
