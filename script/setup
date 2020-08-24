@@ -41,6 +41,3 @@ fi
 
 echo "==> Creating database..."
 bundle exec rails db:setup
-
-echo "==> Running database migrations..."
-bundle exec rails db:migrate
