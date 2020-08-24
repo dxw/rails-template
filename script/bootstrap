@@ -52,7 +52,8 @@ fi
 
 if ! bundle check >/dev/null 2>&1; then
   echo "==> Installing Ruby dependencies..."
-  bundle install --path vendor/bundle
+  bundle config set path vendor/bundle
+  bundle install
 fi
 
 if [ -f package.json ]; then
