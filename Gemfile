@@ -7,7 +7,6 @@ ruby "2.6.3"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "bootstrap", ">= 4.3.1"
 gem "coffee-rails", "~> 5.0"
-gem "haml-rails"
 gem "high_voltage"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
@@ -35,7 +34,6 @@ end
 
 group :development do
   gem "better_errors"
-  gem "html2haml"
   gem "rails_layout"
   gem "spring-commands-rspec"
 end

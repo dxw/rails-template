@@ -104,7 +104,6 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.9.0)
-    erubis (2.7.0)
     execjs (2.7.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
@@ -116,21 +115,7 @@ GEM
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    haml (5.1.2)
-      temple (>= 0.8.0)
-      tilt
-    haml-rails (2.0.1)
-      actionpack (>= 5.1)
-      activesupport (>= 5.1)
-      haml (>= 4.0.6, < 6.0)
-      html2haml (>= 1.0.1)
-      railties (>= 5.1)
     high_voltage (3.1.2)
-    html2haml (2.2.0)
-      erubis (~> 2.7.0)
-      haml (>= 4.0, < 6)
-      nokogiri (>= 1.6.0)
-      ruby_parser (~> 3.5)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.1)
@@ -244,8 +229,6 @@ GEM
       rubocop (>= 0.87.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.10.1)
-    ruby_parser (3.14.0)
-      sexp_processor (~> 4.9)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -260,7 +243,6 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    sexp_processor (4.13.0)
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -277,7 +259,6 @@ GEM
     standard (0.6.2)
       rubocop (= 0.91.1)
       rubocop-performance (= 1.8.1)
-    temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -318,9 +299,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
-  haml-rails
   high_voltage
-  html2haml
   jbuilder (~> 2.5)
   jquery-rails
   launchy
