@@ -1,3 +1,8 @@
+<!--
+  TODO: Replace repo name
+  [![Coverage Status](https://coveralls.io/repos/github/dxw/rails-template/badge.svg?branch=main)](https://coveralls.io/github/dxw/rails-template?branch=main)
+-->
+
 # Using this template
 
 1. Search for `TODO` across the repository to customise the template to the new
