@@ -26,3 +26,8 @@ jobs:
             -e DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true \
             -e DATABASE_URL=postgres://test@pg:5432/app_test \
             app:test bundle exec rake
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov/app.lcov
