@@ -28,7 +28,14 @@ jobs:
             -e RAILS_ENV=test \
             -e DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true \
             -e DATABASE_URL=postgres://test@pg:5432/app_test \
+            -v coverage:/srv/app/coverage \
             app:test bundle exec rake
+      - name: DEBUG
+        run: ls -la
+      - name: DEBUG2
+        run: ls -la coverage
+      - name: DEBUG3
+        run: ls -la ./coverage
       - name: Coveralls
         uses: coverallsapp/github-action@v1.1.2
         with:

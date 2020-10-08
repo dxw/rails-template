@@ -19,7 +19,11 @@
 require "simplecov"
 require "simplecov-lcov"
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+SimpleCov::Formatter::LcovFormatter.config do |config|
+  config.single_report_path = "coverage/lcov/app.lcov"
+end
 SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+
 SimpleCov.start
 
 RSpec.configure do |config|
