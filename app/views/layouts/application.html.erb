@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>
+      <%= content_for?(:title) ? yield(:title) : "Rails Template" %>
+    </title>
+    <meta content="<%= content_for?(:description) ? yield(:description) : "Rails Template" %>" name="description"/>
+    <%= stylesheet_link_tag "application", media: 'all', "data-turbolinks-track" => "reload" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render "layouts/navigation" %>
+    </header>
+    <main role="main">
+      <%= render "layouts/messages" %>
+      <%= yield %>
+    </main>
+  </body>
+</html>
