@@ -1,5 +1,16 @@
 {
   "name": "rails-template",
   "private": true,
-  "dependencies": {}
+  "scripts": {
+    "lint:format": "prettier --check '**/*'",
+    "lint:format:fix": "prettier --write '**/*'",
+    "lint:js": "eslint .",
+    "lint:js:fix": "yarn run lint:js --fix"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "prettier": "^2.0.5"
+  }
 }

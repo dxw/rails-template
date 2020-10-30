@@ -1,0 +1,5 @@
+brew "nodenv"
+brew "postgresql"
+brew "rbenv"
+brew "shellcheck"
+brew "yarn"

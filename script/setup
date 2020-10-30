@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# script/setup: Set up the application for the first time after cloning, or set
+#               it back to the initial unused state.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+if [ -d vendor/bundle ]; then
+  echo "==> Cleaning installed Ruby dependencies..."
+  git clean -x --force -- vendor/bundle
+fi
+
+echo "==> Bootstrapping..."
+script/bootstrap
+
+if [ ! -f .env.development.local ]; then
+  echo "==> Copying default environment config..."
+  cp .env.example .env.development.local
+fi
+
+echo "==> Dropping database..."
+set +e
+bundle exec rails db:drop
+DB_DROP_RESULT=$?
+set -e
+
+if [ -z "$CI" ] && [ -n "$DB_DROP_RESULT" ]; then
+  printf "\nDatabase drop failed. Continue anyway? [y/N] "
+  read -r
+
+  case $REPLY in
+    y | Y)
+      ;;
+    *)
+      exit 1
+      ;;
+  esac
+fi
+
+echo "==> Creating database..."
+bundle exec rails db:setup
+
+echo "==> Dropping test database..."
+set +e
+RAILS_ENV="test" bundle exec rails db:drop
+DB_DROP_RESULT=$?
+set -e
+
+if [ -z "$CI" ] && [ -n "$DB_DROP_RESULT" ]; then
+  printf "\nDatabase drop failed. Continue anyway? [y/N] "
+  read -r
+
+  case $REPLY in
+    y | Y)
+      ;;
+    *)
+      exit 1
+      ;;
+  esac
+fi
+
+echo "==> Creating test database..."
+RAILS_ENV="test" bundle exec rails db:setup

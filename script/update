@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# script/update: Update application to run for its current checkout.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Bootstrapping..."
+script/bootstrap
+
+echo "==> Running database migrations..."
+bundle exec rails db:migrate
+
+echo "==> Running test database migrations..."
+RAILS_ENV="test" bundle exec rails db:migrate

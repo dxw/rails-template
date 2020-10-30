@@ -91,3 +91,6 @@ config/master.key
 .env.*
 !.env.example
 !.env.test
+
+/node_modules/
+/Brewfile.lock.json
