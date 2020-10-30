@@ -3,9 +3,9 @@
   <head>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>
-      <%= content_for?(:title) ? yield(:title) : "Rails Template" %>
+      <%= content_for?(:title) ? yield(:title) : I18n.t("app.name") %>
     </title>
-    <meta content="<%= content_for?(:description) ? yield(:description) : "Rails Template" %>" name="description"/>
+    <meta content="<%= content_for?(:description) ? yield(:description) : I18n.t("app.name") %>" name="description"/>
     <%= stylesheet_link_tag "application", media: 'all', "data-turbolinks-track" => "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
     <%= csrf_meta_tags %>

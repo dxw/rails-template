@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  app:
+    # TODO: Set new application name
+    name: "Rails Template"
   hello: "Hello world"
