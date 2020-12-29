@@ -2,7 +2,6 @@
 
 Date: 2020-10-19
 
-
 ## Status
 
 Accepted
