@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -qq -y \
   libpq-dev \
   nodejs \
   yarn \
+  shellcheck \
   --fix-missing --no-install-recommends
 
 ENV INSTALL_PATH /srv/app
