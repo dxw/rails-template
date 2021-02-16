@@ -6,7 +6,7 @@ updates:
       interval: daily
       time: "11:00"
       timezone: Europe/London
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
     versioning-strategy: auto
     target-branch: develop
   - package-ecosystem: npm
@@ -15,6 +15,6 @@ updates:
       interval: daily
       time: "11:00"
       timezone: Europe/London
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
     versioning-strategy: auto
     target-branch: develop
