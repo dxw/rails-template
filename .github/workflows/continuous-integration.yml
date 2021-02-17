@@ -46,7 +46,8 @@ jobs:
             -e RAILS_ENV=test \
             -e DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true \
             -e DATABASE_URL=postgres://test@pg:5432/app_test \
-            app:test bundle exec rake
+            -e CI=true \
+            app:test script/test
       - name: Prepare Docker cache
         run:
           mkdir -p /tmp/docker-save && docker save app:test -o

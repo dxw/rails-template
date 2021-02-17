@@ -27,7 +27,7 @@ DB_DROP_RESULT=$?
 set -e
 
 if [ -z "$CI" ] && [ -n "$DB_DROP_RESULT" ]; then
-  printf "\nDatabase drop failed. Continue anyway? [y/N] "
+  printf "\\nDatabase drop failed. Continue anyway? [y/N] "
   read -r
 
   case $REPLY in
@@ -49,7 +49,7 @@ DB_DROP_RESULT=$?
 set -e
 
 if [ -z "$CI" ] && [ -n "$DB_DROP_RESULT" ]; then
-  printf "\nDatabase drop failed. Continue anyway? [y/N] "
+  printf "\\nDatabase drop failed. Continue anyway? [y/N] "
   read -r
 
   case $REPLY in

@@ -23,3 +23,5 @@
 *.ru
 *.sh
 *.txt
+*.gz
+/public/assets/*

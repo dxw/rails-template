@@ -1,11 +1,17 @@
 FROM ruby:2.7.2 as release
 MAINTAINER dxw <rails@dxw.com>
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
 RUN apt-get update && apt-get install -qq -y \
   build-essential \
   libpq-dev \
+  nodejs \
+  yarn \
+  shellcheck \
   --fix-missing --no-install-recommends
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-        && apt-get install -y nodejs
 
 ENV INSTALL_PATH /srv/app
 RUN mkdir -p $INSTALL_PATH
