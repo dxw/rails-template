@@ -93,6 +93,15 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # See https://github.com/rails/rails/issues/29893
+  # This only allows hosts the application can trust when using `url_for` and related helpers
+  if ENV["CANONICAL_HOSTNAME"].present?
+    hosts = []
+    hosts << ENV["CANONICAL_HOSTNAME"]
+    hosts += ENV["ADDITIONAL_HOSTNAMES"].split(",").map { |domain| domain } if ENV["ADDITIONAL_HOSTNAMES"].present?
+    config.hosts = hosts.compact
+  end
+
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
   # middleware. The `delay` is used to determine how long to wait after a write
