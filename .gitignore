@@ -42,3 +42,6 @@
 /coverage/
 /log/
 tmp/
+
+## Build artefacts
+/public/assets/
