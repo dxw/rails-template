@@ -26,6 +26,18 @@
 tmp/
 
 ## Sensitive files
+#
+# To override these ignored files on a case-by-case basis,
+# instead of adding a rule to this file, force add them:
+#
+# ```
+# git add path/to/file --force
+# ```
+#
+# This reduces the risk of accidentally committing files that happen to match
+# the ignore pattern exception, or a file being removed and readded
+# unintentionally in the future.
+#
 .env
 .env.*
 *.key*
