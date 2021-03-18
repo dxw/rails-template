@@ -29,8 +29,25 @@
 #
 .env
 .env.*
+*.bks*
+*.csv*
+*.crt*
+*.db*
+*.dex*
+*.dump*
 *.key*
+*.numbers*
+*.ods*
+*.ots*
+*.pem*
+*.sql*
 *.sqlite3*
+*.tfstate*
+*.tfvars*
+*.tsv*
+*.xlr*
+*.xls*
+*.xml*
 
 ## Dependencies
 /Brewfile.lock.json
