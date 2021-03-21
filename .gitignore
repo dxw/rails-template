@@ -35,6 +35,8 @@
 ### Environment variables
 .env
 .env.*
+### Logs
+*.log*
 ### Secrets and keys
 *.crt*
 *.key*
