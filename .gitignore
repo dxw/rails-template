@@ -52,8 +52,11 @@
 *.xlr*
 *.xls*
 ### Terraform
+.terraformrc*
+terraform.rc*
 *.tfstate*
 *.tfvars*
+.terraform/
 ### XML data
 *.xml*
 
