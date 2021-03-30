@@ -27,26 +27,37 @@
 # the ignore pattern exception, or a file being removed and readded
 # unintentionally in the future.
 #
+### Databases
+*.db*
+*.dump*
+*.sql*
+*.sqlite3*
+### Environment variables
 .env
 .env.*
+### Logs
+*.log*
+### Secrets and keys
+*.crt*
+*.key*
+*.pem*
+### Spreadsheet data
 *.bks*
 *.csv*
-*.crt*
-*.db*
 *.dex*
-*.dump*
-*.key*
 *.numbers*
 *.ods*
 *.ots*
-*.pem*
-*.sql*
-*.sqlite3*
-*.tfstate*
-*.tfvars*
 *.tsv*
 *.xlr*
 *.xls*
+### Terraform
+.terraformrc*
+terraform.rc*
+*.tfstate*
+*.tfvars*
+.terraform/
+### XML data
 *.xml*
 
 ## Dependencies
