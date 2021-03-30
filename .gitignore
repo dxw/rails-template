@@ -1,3 +1,14 @@
+## IMPORTANT ##
+#
+# Usually a pattern here also belongs in your `.dockerignore` file and vice
+# versa.
+#
+# Note that Docker's ignore syntax is slightly different to Git's. The main
+# difference is that Git interprets patterns without a leading slash as applying
+# to any subdirectory, while Docker interprets them as relative to the project
+# root directory. To resolve that, a `.dockerignore` should prefix those
+# patterns with `**/`. This is also compatible with Git.
+#
 ## How to use this file
 #
 # Add patterns to the section they apply to, sorted by:
