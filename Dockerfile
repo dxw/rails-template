@@ -23,9 +23,14 @@ ARG RAILS_ENV
 ENV RAILS_ENV=${RAILS_ENV:-production}
 ENV RACK_ENV=${RAILS_ENV:-production}
 
+# Install Javascript dependencies
+COPY yarn.lock $INSTALL_PATH/yarn.lock
+COPY package.json $INSTALL_PATH/package.json
+RUN yarn install
+
+# Install Ruby dependencies
 COPY Gemfile $INSTALL_PATH/Gemfile
 COPY Gemfile.lock $INSTALL_PATH/Gemfile.lock
-
 RUN gem update --system
 RUN gem install bundler
 
@@ -34,7 +39,27 @@ RUN bundle config set no-cache "true"
 RUN bundle config set with $BUNDLE_GEM_GROUPS
 RUN bundle install --retry=10 --jobs=4
 
-COPY . $INSTALL_PATH
+# Copy app code (sorted by vague frequency of change for caching)
+RUN mkdir -p ${INSTALL_PATH}/log
+RUN mkdir -p ${INSTALL_PATH}/tmp
+
+COPY config.ru ${INSTALL_PATH}/config.ru
+COPY Rakefile ${INSTALL_PATH}/Rakefile
+
+COPY /.eslintignore ${INSTALL_PATH}/.eslintignore
+COPY .eslintrc.json ${INSTALL_PATH}/.eslintrc.json
+COPY .prettierignore ${INSTALL_PATH}/.prettierignore
+COPY .prettierrc ${INSTALL_PATH}/.prettierrc
+
+COPY public ${INSTALL_PATH}/public
+COPY vendor ${INSTALL_PATH}/vendor
+COPY bin ${INSTALL_PATH}/bin
+COPY lib ${INSTALL_PATH}/lib
+COPY config ${INSTALL_PATH}/config
+COPY db ${INSTALL_PATH}/db
+COPY script ${INSTALL_PATH}/script
+COPY app ${INSTALL_PATH}/app
+# End
 
 RUN RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE="super secret" bundle exec rake assets:precompile --quiet
 
