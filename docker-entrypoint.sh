@@ -11,6 +11,11 @@ setup_database()
   echo "ENTRYPOINT: Finished database setup."
 }
 
+# Bundle any Gemfile changes in development without requiring a long image rebuild
+if [ ! "$RAILS_ENV" == "production" ]; then
+  if bundle check; then echo "ENTRYPOINT: Skipping bundle for development"; else bundle; fi
+fi
+
 if [ -z ${DATABASE_URL+x} ]; then echo "Skipping database setup"; else setup_database; fi
 
 echo "ENTRYPOINT: Finished docker entrypoint."
