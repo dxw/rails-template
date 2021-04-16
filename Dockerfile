@@ -26,17 +26,14 @@ ENV RACK_ENV=${RAILS_ENV:-production}
 COPY Gemfile $INSTALL_PATH/Gemfile
 COPY Gemfile.lock $INSTALL_PATH/Gemfile.lock
 
-RUN gem update --system
+RUN gem update --system --quiet
 RUN gem install bundler
 
-# bundle ruby gems based on the current environment, default to production
-RUN echo $RAILS_ENV
-RUN \
-  if [ "$RAILS_ENV" = "production" ]; then \
-    bundle install --without development test --retry 10; \
-  else \
-    bundle install --retry 10; \
-  fi
+ARG BUNDLE_EXTRA_GEM_GROUPS
+ENV BUNDLE_GEM_GROUPS=${BUNDLE_EXTRA_GEM_GROUPS:-"production"}
+RUN bundle config set no-cache "true"
+RUN bundle config set with $BUNDLE_GEM_GROUPS
+RUN bundle install --no-binstubs --retry=3 --jobs=4
 
 COPY . $INSTALL_PATH
 

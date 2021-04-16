@@ -30,11 +30,9 @@ jobs:
       - name: Build
         run: docker-compose -f docker-compose.ci.yml build
       - name: Test
-        run: docker-compose -f docker-compose.ci.yml run --rm test \
-          bundle exec rake && \
-          bundle exec brakeman -o /dev/stdout
+        run: docker-compose -f docker-compose.ci.yml run --rm test bundle exec rake
       - name: Prepare Docker cache
         run:
-          mkdir -p /tmp/docker-save && docker save app:test -o
+          mkdir -p /tmp/docker-save && docker save rails-template_test:latest -o
           /tmp/docker-save/snapshot.tar && ls -lh /tmp/docker-save
         if: always() && steps.cache-docker.outputs.cache-hit != 'true'
