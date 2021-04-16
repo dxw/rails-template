@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Set up Docker
-        run: docker network create test
       - id: cache-docker
         uses: actions/cache@v2
         with:
@@ -29,27 +27,12 @@ jobs:
       - name: Load cached Docker image
         run: docker load -i /tmp/docker-save/snapshot.tar || true
         if: steps.cache-docker.outputs.cache-hit == 'true'
-      - name: Set up Postgres
-        run:
-          docker run -d --name pg --network test -e POSTGRES_USER=test -e
-          POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 postgres:11
-      - name: Build a new Docker image
-        run: |
-          docker build . \
-            --build-arg RAILS_ENV=test \
-            -t app:test \
-            --cache-from app:test
-      - name: Run the tests
-        run: |
-          docker run --name test-container \
-            --network test \
-            -e RAILS_ENV=test \
-            -e DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true \
-            -e DATABASE_URL=postgres://test@pg:5432/app_test \
-            -e CI=true \
-            app:test script/test
+      - name: Build
+        run: docker-compose -f docker-compose.ci.yml build
+      - name: Test
+        run: docker-compose -f docker-compose.ci.yml run --rm test script/test
       - name: Prepare Docker cache
         run:
-          mkdir -p /tmp/docker-save && docker save app:test -o
+          mkdir -p /tmp/docker-save && docker save rails-template_test:latest -o
           /tmp/docker-save/snapshot.tar && ls -lh /tmp/docker-save
         if: always() && steps.cache-docker.outputs.cache-hit != 'true'
