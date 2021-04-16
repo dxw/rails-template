@@ -22,25 +22,25 @@ TODO: Add a summary of who the application is for and what it will do.
 Run the setup script:
 
 ```bash
-script/setup
+$ script/dserver
 ```
 
 Run the tests:
 
 ```bash
-script/test
+$ script/setup
 ```
 
 Start the server:
 
 ```bash
-script/server
+$ script/server
 ```
 
 Start a console:
 
 ```bash
-script/console
+$ script/console
 ```
 
 ## Static code analysis
@@ -49,13 +49,13 @@ Run [Brakeman](https://brakemanscanner.org/) to highlight any security
 vulnerabilities:
 
 ```bash
-brakeman
+$ brakeman
 ```
 
 To pipe the results to a file:
 
 ```bash
-brakeman -o report.text
+$ brakeman -o report.text
 ```
 
 ## Making changes
