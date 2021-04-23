@@ -5,6 +5,9 @@ services:
       context: .
       args:
         RAILS_ENV: "test"
+      cache_from:
+        - app_test:latest
+    image: app_test
     command: bundle exec rake
     ports:
       - "3000:3000"
