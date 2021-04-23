@@ -25,3 +25,4 @@
 *.txt
 *.gz
 /public/assets/*
+/coverage
