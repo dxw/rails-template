@@ -49,4 +49,7 @@ else
 
   echo "==> Running the tests..."
   bundle exec rspec
+
+  echo "==> Running Brakeman"
+  bundle exec brakeman -o /dev/stdout
 fi
