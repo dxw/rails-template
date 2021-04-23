@@ -29,14 +29,10 @@ COPY Gemfile.lock $INSTALL_PATH/Gemfile.lock
 RUN gem update --system
 RUN gem install bundler
 
-# bundle ruby gems based on the current environment, default to production
-RUN echo $RAILS_ENV
-RUN \
-  if [ "$RAILS_ENV" = "production" ]; then \
-    bundle install --without development test --retry 10; \
-  else \
-    bundle install --retry 10; \
-  fi
+ENV BUNDLE_GEM_GROUPS=$RAILS_ENV
+RUN bundle config set no-cache "true"
+RUN bundle config set with $BUNDLE_GEM_GROUPS
+RUN bundle install --retry=10 --jobs=4
 
 COPY . $INSTALL_PATH
 
