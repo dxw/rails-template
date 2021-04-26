@@ -90,3 +90,5 @@
 /Brewfile
 ### Workflow configuration
 /.github/
+### git stuff
+/.git/
