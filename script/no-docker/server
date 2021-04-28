@@ -5,6 +5,8 @@
 
 set -e
 
-docker-compose up --detach
-# TODO: Repace 'rails-template' with application name
-docker attach rails-template_web_1
+echo "==> Updating..."
+script/no-docker/update
+
+echo "==> Starting the development server..."
+bundle exec rails server

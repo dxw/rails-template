@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# script/test: Run the test suite for the application in docker containers.
+
+set -e
+
+docker-compose -f docker-compose.test.yml \
+               run --rm test \
+               script/run_all_tests "$@"

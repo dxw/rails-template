@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# script/test: Run the test suite for the application. Optionally pass in a path
+#              to an individual test file to run a single test.
+
+set -e
+
+if [ -n "$DEBUG" ]; then
+  set -x
+fi
+
+echo "==> Updating..."
+script/no-docker/update
+
+AUTOMATICALLY_FIX_LINTING=true script/run_all_tests "$@"
