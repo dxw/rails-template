@@ -83,6 +83,8 @@
 
 ## Build artefacts
 /public/assets/
+/public/packs/
+/public/packs-test/
 
 ## Docker specific patterns ##
 #
