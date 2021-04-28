@@ -74,7 +74,6 @@ terraform.rc*
 ## Dependencies
 /Brewfile.lock.json
 /.bundle/
-/node_modules/
 /vendor/bundle/
 
 ## Temporary files
@@ -84,3 +83,10 @@ tmp/
 
 ## Build artefacts
 /public/assets/
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
