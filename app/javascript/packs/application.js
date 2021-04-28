@@ -17,6 +17,8 @@
 import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
 import "channels";
+import GoogleAnalytics from "google_analytics";
 
 Rails.start();
 Turbolinks.start();
+GoogleAnalytics.load();
