@@ -1,4 +1,9 @@
+/babel.config.js
+/postcss.config.js
+/config/webpack
 /log/
 /tmp/
 /vendor/
 /public/assets
+/public/packs
+/public/packs-test
