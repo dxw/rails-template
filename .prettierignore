@@ -24,4 +24,8 @@
 *.sh
 *.txt
 *.gz
+/config/webpack/*
+/config/webpacker.yml
 /public/assets/*
+/public/packs/*
+/public/packs-test/*
