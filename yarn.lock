@@ -1950,6 +1950,19 @@ coa@^2.0.2:
     chalk "^2.4.1"
     q "^1.1.2"
 
+coffee-loader@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/coffee-loader/-/coffee-loader-1.0.1.tgz#f672c4b2ea358e039f702ad590148f7a1dda77f0"
+  integrity sha512-l3lcWeyNE11ZXNYEpkIkerrvBdSpT06/kcR7MyY+0ys38MOuqzhr+s+s7Tsvv2QH1+qEmhvG8mGuUWIO2zH7Bg==
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
+
+coffeescript@1.12.7:
+  version "1.12.7"
+  resolved "https://registry.yarnpkg.com/coffeescript/-/coffeescript-1.12.7.tgz#e57ee4c4867cf7f606bfc4a0f2d550c0981ddd27"
+  integrity sha512-pLXHFxQMPklVoEekowk8b3erNynC+DVJzChxS/LCBBgR6/8AJkHivkm//zbowcfc7BTCAjryuhx6gPqPRfsFoA==
+
 collection-visit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/collection-visit/-/collection-visit-1.0.0.tgz#4bc0373c164bc3291b4d368c829cf1a80a59dca0"
