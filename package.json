@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.3.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
