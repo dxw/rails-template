@@ -18,7 +18,6 @@ gem "rails", "~> 6.1.3"
 gem "sass-rails", "~> 6.0"
 gem "turbolinks", "~> 5"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
-gem "uglifier", ">= 1.3.0"
 gem "webpacker"
 
 group :development do
