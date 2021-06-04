@@ -48,4 +48,5 @@ group :test do
   gem "launchy"
   gem "selenium-webdriver"
   gem "simplecov"
+  gem "climate_control"
 end

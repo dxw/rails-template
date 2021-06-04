@@ -42,6 +42,17 @@ COPY . $INSTALL_PATH
 
 RUN RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE="super secret" bundle exec rake assets:precompile --quiet
 
+# TODO:
+# In order to expose the current git sha & time of build in the /healthcheck
+# endpoint, pass these values into your deployment script, for example:
+# --build-arg current_sha="$GITHUB_SHA" \
+# --build-arg time_of_build="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+ARG current_sha
+ARG time_of_build
+
+ENV CURRENT_SHA=$current_sha
+ENV TIME_OF_BUILD=$time_of_build
+
 # db setup
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
