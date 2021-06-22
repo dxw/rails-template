@@ -1,0 +1,72 @@
+name: Automatic Rebase
+on:
+  issue_comment:
+    types: [created]
+  pull_request_target:
+    types: [auto_merge_enabled]
+env:
+  AUTO_REBASE_PERSONAL_ACCESS_TOKEN:
+    ${{ secrets.AUTO_REBASE_PERSONAL_ACCESS_TOKEN }}
+jobs:
+  check_token:
+    if:
+      ${{ (github.event.issue.pull_request != '' &&
+      contains(github.event.comment.body, '/rebase')) || github.event_name ==
+      'pull_request_target' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prompt user to add a token
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number || github.event.number }}
+          body: |
+            To automatically rebase, you need to add a [personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with the name `AUTO_REBASE_PERSONAL_ACCESS_TOKEN`
+            to the [secrets section of this repo](https://github.com/${{ github.event.repository.full_name }}/settings/secrets/actions).
+
+            Once this is done, you can try the `/rebase` command again.
+        if: ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN == '' }}
+      - name: Add -1 reaction
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ github.event.comment.id }}
+          reactions: "-1"
+        if:
+          ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN == '' &&
+          github.event.comment }}
+      - name: Add +1 reaction
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ github.event.comment.id }}
+          reactions: "+1"
+        if:
+          ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN != '' &&
+          github.event.comment }}
+  rebase:
+    if:
+      ${{ github.event.issue.pull_request != '' &&
+      contains(github.event.comment.body, '/rebase') || github.event_name ==
+      'pull_request_target' }}
+    name: Rebase
+    needs: check_token
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN }}
+          fetch-depth: 0
+        if: ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN != '' }}
+      - name: Automatic Rebase
+        uses: cirrus-actions/rebase@1.4
+        env:
+          GITHUB_TOKEN: ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN }}
+        if: ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN != '' }}
+      - name: Send failure message
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number || github.event.number }}
+          body: |
+            Automatic rebasing for this issue has failed :disappointed:
+
+            You'll have to rebase this one manually, I'm afraid.
+        if: ${{ failure() }}
