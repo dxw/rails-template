@@ -4,10 +4,8 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
-
 echo "==> Bootstrapping..."
-script/bootstrap
+script/no-docker/bootstrap
 
 echo "==> Running database migrations..."
 bundle exec rails db:migrate

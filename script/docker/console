@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# script/console: Launch a console for the application alongside any other
+#                 required processes inside Docker containers
+
+set -e
+
+docker-compose run --rm web bundle exec rails console

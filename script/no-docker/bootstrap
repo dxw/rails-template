@@ -5,8 +5,6 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
-
 if [ -f .gitmodules ]; then
   echo "==> Updating Git submodules..."
   git submodule update --init

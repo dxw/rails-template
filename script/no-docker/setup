@@ -5,15 +5,13 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
-
 if [ -d vendor/bundle ]; then
   echo "==> Cleaning installed Ruby dependencies..."
   git clean -x --force -- vendor/bundle
 fi
 
 echo "==> Bootstrapping..."
-script/bootstrap
+script/no-docker/bootstrap
 
 if [ ! -f .env.development.local ]; then
   echo "==> Copying default environment config..."
