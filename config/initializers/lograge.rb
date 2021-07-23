@@ -4,4 +4,10 @@ Rails.application.configure do
   config.lograge.custom_options = lambda do |event|
     {time: Time.now.utc}
   end
+  config.lograge.custom_payload do |controller|
+    {
+      host: controller.request.host,
+      user_id: controller.try(:current_user).try(:id) || "undefined"
+    }
+  end
 end
