@@ -7,6 +7,22 @@
    those that have not resulted in a default code change in this repository:
    - [rfc-013-use-docker-to-deploy-and-run-applications-in-containers](https://github.com/dxw/tech-team-rfcs/blob/master/rfc-013-use-docker-to-deploy-and-run-applications-in-containers.md)
 
+## Maintaining the template
+
+We want to keep the template as current as we can, where possible minor and
+patch dependency updates should be merged without seeking approval from three
+members of the development team, however they must still be reviewed and the
+tests must pass before merging.
+
+Use best judgement for major updates, if in doubt, look for those three
+approvals.
+
+Developers with the correct permissions can override the three approvals merging
+restriction per dependency.
+
+Any other changes must be discussed in the open and receive the three approvals
+as is usual.
+
 TODO: Remove this section from the README once complete
 
 ---
