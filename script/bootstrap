@@ -5,60 +5,13 @@
 
 set -e
 
+# Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/.."
 
-if [ -f .gitmodules ]; then
-  echo "==> Updating Git submodules..."
-  git submodule update --init
-fi
-
-if [ -z "$CI" ]; then
-  if [ -f Brewfile ] && [ "$(uname -s)" = "Darwin" ]; then
-    if ! brew bundle check >/dev/null 2>&1; then
-      echo "==> Installing Homebrew dependencies..."
-      brew bundle install --verbose --no-lock
-    fi
-  fi
-
-  if [ -f .ruby-version ]; then
-    eval "$(rbenv init -)"
-
-    if [ -z "$(rbenv version-name 2>/dev/null)" ]; then
-      echo "==> Installing Ruby..."
-      rbenv install --skip-existing
-      rbenv rehash
-    fi
-  fi
-
-  if [ -f .node-version ]; then
-    eval "$(nodenv init -)"
-
-    if [ -z "$(nodenv version-name 2>/dev/null)" ]; then
-      echo "==> Installing Node..."
-      nodenv install --skip-existing
-      nodenv rehash
-    fi
-  fi
-fi
-
-if ! command -v bundle >/dev/null 2>&1; then
-  echo "==> Installing Bundler..."
-  gem install bundler
-
-  if [ -z "$CI" ]; then
-    rbenv rehash
-  fi
-fi
-
-if ! bundle check >/dev/null 2>&1; then
-  echo "==> Installing Ruby dependencies..."
-  bundle config set path vendor/bundle
-  bundle install
-fi
-
-if [ -f package.json ]; then
-  if ! yarn check --verify-tree >/dev/null 2>&1; then
-    echo "==> Installing JS dependencies..."
-    yarn install
-  fi
+if [ "$DOCKER" ]; then
+  echo "==> Running with Docker..."
+  script/docker/bootstrap "$@"
+else
+  echo "==> Running natively (no docker)..."
+  script/no-docker/bootstrap "$@"
 fi

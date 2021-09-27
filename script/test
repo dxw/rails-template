@@ -1,55 +1,28 @@
 #!/bin/sh
 
-# script/test: Run the test suite for the application. Optionally pass in a path
-#              to an individual test file to run a single test.
+# script/test: Run the test suite for the application.
+#
+#              Optionally pass in a path to an individual test file to run a
+#              single test.
+#
+#              Use variables to control how you want to provision your local
+#              environment.
+#              Eg. `DOCKER=true script/console`
+#              Or, add this as a global variable to your shell so it's set
+#              automatically.
 
 set -e
 
+# Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/.."
 
-if [ -n "$DEBUG" ]; then
-  set -x
-fi
-
-echo "==> Updating..."
-script/update
-
-TEST_FILE=$1
-
-if [ -n "$TEST_FILE" ]; then
-  echo "==> Running the tests matching '$TEST_FILE'..."
-  bundle exec rspec --pattern "$TEST_FILE"
+if [ "$CI" ]; then
+  echo "==> Running as CI..."
+  script/ci/test "$@"
+elif [ "$DOCKER" ]; then
+  echo "==> Running with Docker..."
+  script/docker/test "$@"
 else
-  if [ -n "$CI" ]; then
-    echo "==> Checking formatting..."
-    yarn run lint:format
-  else
-    echo "==> Formatting files..."
-    yarn run lint:format:fix
-  fi
-
-  echo "==> Running ShellCheck..."
-  shellcheck script/*
-
-  if [ -n "$CI" ]; then
-    echo "==> Linting Ruby..."
-    bundle exec standardrb
-  else
-    echo "==> Linting Ruby in fix mode..."
-    bundle exec standardrb --fix
-  fi
-
-  if [ -n "$CI" ]; then
-    echo "==> Linting JS..."
-    yarn run lint:js
-  else
-    echo "==> Linting JS in fix mode..."
-    yarn run lint:js:fix
-  fi
-
-  echo "==> Running the tests..."
-  bundle exec rspec
-
-  echo "==> Running Brakeman"
-  bundle exec brakeman -o /dev/stdout
+  echo "==> Running natively (no docker)..."
+  script/no-docker/test "$@"
 fi

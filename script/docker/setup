@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Set up the application for the first time after cloning, or set it back to the
+# initial unused state.
+
+set -e
+
+# Enable the running of this script from any subdirectory without moving to root
+cd "$(dirname "$0")/../.."
+
+echo "==> Tearing down any previous application state..."
+docker-compose down -v
+
+script/bootstrap

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Update application to run for its current checkout.
+
+set -e
+
+# Enable the running of this script from any subdirectory without moving to root
+cd "$(dirname "$0")/../.."
+
+echo "==> Rebuilding Docker image in order to bundle new gems..."
+docker-compose build web

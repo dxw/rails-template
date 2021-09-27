@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Launch a console for the application alongside any other required processes
+# inside Docker containers
+
+set -e
+
+# Enable the running of this script from any subdirectory without moving to root
+cd "$(dirname "$0")/../.."
+
+docker-compose run --rm web bundle exec rails console

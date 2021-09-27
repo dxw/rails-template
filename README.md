@@ -33,31 +33,7 @@ TODO: replace README header with project name
 
 TODO: Add a summary of who the application is for and what it will do.
 
-## Getting started
-
-Run the setup script:
-
-```bash
-$ script/server
-```
-
-Run the tests:
-
-```bash
-$ script/setup
-```
-
-Start the server:
-
-```bash
-$ script/server
-```
-
-Start a console:
-
-```bash
-$ script/console
-```
+1. [Getting started](/doc/getting-started.md)
 
 ## Static code analysis
 

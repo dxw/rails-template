@@ -28,9 +28,9 @@ jobs:
         run: docker load -i /tmp/docker-save/snapshot.tar || true
         if: steps.cache-docker.outputs.cache-hit == 'true'
       - name: Build
-        run: docker-compose -f docker-compose.ci.yml -p app build
+        run: script/ci/cibuild
       - name: Test
-        run: docker-compose -f docker-compose.ci.yml run --rm test script/test
+        run: script/ci/test
       - name: Prepare Docker cache
         run:
           mkdir -p /tmp/docker-save && docker save app_test:latest -o

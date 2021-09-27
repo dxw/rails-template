@@ -15,6 +15,7 @@ services:
     environment:
       # TODO: Update rails-template with application name
       DATABASE_URL: postgres://postgres:password@db:5432/rails-template-development
+      AUTOMATICALLY_FIX_LINTING: "true"
     volumes:
       - .:/srv/app
     tty: true

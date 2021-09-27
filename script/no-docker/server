@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Launch the application and any extra required processes locally.
+
+set -e
+
+# Enable the running of this script from any subdirectory without moving to root
+cd "$(dirname "$0")/../.."
+
+echo "==> Updating..."
+script/no-docker/update
+
+echo "==> Starting the development server..."
+bundle exec rails server
