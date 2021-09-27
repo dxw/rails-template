@@ -45,3 +45,31 @@ Running the tests regularly should be done without Docker as it is much faster.
 ```bash
 $ brew install --cask docker
 ```
+
+### Usage
+
+#### Occassional use
+
+Use the `--docker` switch:
+
+```bash
+$ script/test --docker
+```
+
+#### Regular use
+
+You can set `PREFER_DOCKER_FOR_DXW_RAILS=1` in your env to set this preference
+automatically.
+
+- Option 1:
+  - Install and use
+    [direnv to set an environment variable on a per codebase basis](https://direnv.net/)
+  - Add `PREFER_DOCKER_FOR_DXW_RAILS=1` to your `.envrc`
+  - Load change with `direnv allow .`
+- Option 2:
+  - Set `PREFER_DOCKER_FOR_DXW_RAILS=1` in your global `.zshrc` or `.bashrc`
+  - Load your change with `source .zshrc`
+
+Switches will take priority over any default preference. For example, with
+`PREFER_DOCKER_FOR_DXW_RAILS=1` set you can run `--no-docker` to run without
+Docker.

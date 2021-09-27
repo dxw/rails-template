@@ -2,7 +2,7 @@
 
 # script/console: Launch a console for the application. Use variables to control
 #                 how you want to provision your local environment.
-#                 Eg. `DOCKER=true script/console`
+#                 Eg. `script/console --docker`
 #                 Or, add this as a global variable to your shell so it's set
 #                 automatically.
 
@@ -11,10 +11,26 @@ set -e
 # Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/.."
 
+echo "==> Loading command line options…"
+DOCKER=${PREFER_DOCKER_FOR_DXW_RAILS:-0}
+for arg in "$@"
+do
+  case $arg in
+    --docker)
+      DOCKER=1
+      shift
+      ;;
+    --no-docker)
+      DOCKER=0
+      shift
+      ;;
+  esac
+done
+
 if [ "$CI" ]; then
   echo "==> Running as CI..."
   script/ci/console
-elif [ "$DOCKER" ]; then
+elif [ "$DOCKER" -eq 1 ]; then
   echo "==> Running with Docker..."
   script/docker/console
 else

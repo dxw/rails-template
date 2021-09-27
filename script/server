@@ -12,10 +12,25 @@ set -e
 # Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/.."
 
+echo "==> Loading command line options…"
+DOCKER=${PREFER_DOCKER_FOR_DXW_RAILS:-0}
+for arg in "$@"
+do
+  case $arg in
+    --docker)
+      DOCKER=1
+      ;;
+    --no-docker)
+      DOCKER=0
+      ;;
+  esac
+  shift
+done
+
 if [ "$CI" ]; then
   echo "==> Running as CI..."
   script/ci/server
-elif [ "$DOCKER" ]; then
+elif [ "$DOCKER" -eq 1 ]; then
   echo "==> Running with Docker..."
   script/docker/server
 else
