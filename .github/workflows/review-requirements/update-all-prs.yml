@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  unlabel-prs-as-too-new-to-merge:
+  unlabel-prs-as-new:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
             );
 
       - if: steps.select-pull-requests.outputs.result
-        name: Unlabel old enough PRs as "too-new-to-merge"
+        name: Unlabel old enough PRs as "new"
         uses: actions/github-script@v5.0.0
         with:
           script: |
@@ -34,6 +34,6 @@ jobs:
               { github, context },
               {
                 ids: ${{ steps.select-pull-requests.outputs.result }},
-                labelName: "too-new-to-merge",
+                labelName: "new",
               },
             );

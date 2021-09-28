@@ -6,13 +6,13 @@ on:
       - ready_for_review
 
 jobs:
-  label-as-too-new-to-merge:
+  label-as-new:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Label as "too-new-to-merge"
+      - name: Label as "new"
         uses: andymckay/labeler@1.0.3
         with:
-          add-labels: "too-new-to-merge"
+          add-labels: "new"
           ignore-if-assigned: false
           repo-token: ${{ secrets.GITHUB_TOKEN }}
