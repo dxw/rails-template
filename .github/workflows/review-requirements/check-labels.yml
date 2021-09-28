@@ -1,0 +1,17 @@
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+
+jobs:
+  check-for-too-new-to-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if labelled as "too-new-to-merge"
+        run: |
+          if [ "${{ contains(github.event.pull_request.labels.*.name, 'too-new-to-merge') }}" = true ]; then
+            echo "::error::This PR is still too new to merge"
+            exit 1
+          fi
