@@ -1,0 +1,39 @@
+on:
+  schedule:
+    # Every 10 minutes
+    cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  unlabel-prs-as-too-new-to-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: select-pull-requests
+        name: Select PRs older than 14 days
+        uses: actions/github-script@v5.0.0
+        with:
+          script: |
+            const pullRequests = require("./.github/actions/pull-requests");
+
+            return pullRequests.olderThan(
+              { github, context },
+              { days: 14 },
+            );
+
+      - if: steps.select-pull-requests.outputs.result
+        name: Unlabel old enough PRs as "too-new-to-merge"
+        uses: actions/github-script@v5.0.0
+        with:
+          script: |
+            const pullRequests = require("./.github/actions/pull-requests");
+
+            return pullRequests.removeLabelFrom(
+              { github, context },
+              {
+                ids: ${{ steps.select-pull-requests.outputs.result }},
+                labelName: "too-new-to-merge",
+              },
+            );
