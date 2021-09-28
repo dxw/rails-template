@@ -77,3 +77,10 @@ jobs:
             Automatic rebasing for this issue has failed :disappointed:
 
             You'll have to rebase this one manually, I'm afraid.
+
+      - if: success() && github.event.comment
+        name: React to the triggering comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ github.event.comment.id }}
+          reactions: Hooray
