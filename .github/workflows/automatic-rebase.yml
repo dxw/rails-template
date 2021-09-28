@@ -1,4 +1,3 @@
-name: Automatic Rebase
 on:
   issue_comment:
     types:
@@ -12,7 +11,7 @@ env:
     ${{ secrets.AUTO_REBASE_PERSONAL_ACCESS_TOKEN }}
 
 jobs:
-  check_token:
+  check-token:
     if: |
       (
         github.event.issue.pull_request &&
@@ -42,7 +41,7 @@ jobs:
             ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN && '+1' || '-1' }}
 
   rebase:
-    needs: check_token
+    needs: check-token
     if: |
       (
         (
@@ -83,4 +82,4 @@ jobs:
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ github.event.comment.id }}
-          reactions: Hooray
+          reactions: hooray
