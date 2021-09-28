@@ -33,31 +33,7 @@ TODO: replace README header with project name
 
 TODO: Add a summary of who the application is for and what it will do.
 
-## Getting started
-
-Run the setup script:
-
-```bash
-script/setup
-```
-
-Run the tests:
-
-```bash
-script/test
-```
-
-Start the server:
-
-```bash
-script/server
-```
-
-Start a console:
-
-```bash
-script/console
-```
+1. [Getting started](/doc/getting-started.md)
 
 ## Static code analysis
 
@@ -65,13 +41,13 @@ Run [Brakeman](https://brakemanscanner.org/) to highlight any security
 vulnerabilities:
 
 ```bash
-brakeman
+$ brakeman
 ```
 
 To pipe the results to a file:
 
 ```bash
-brakeman -o report.text
+$ brakeman -o report.text
 ```
 
 ## Making changes

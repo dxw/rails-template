@@ -1,25 +1,39 @@
 #!/bin/sh
 
-# script/console: Launch a console for the application. Optionally pass in an
-#                 environment name to connect to a console for that environment.
+# script/console: Launch a console for the application. Use variables to control
+#                 how you want to provision your local environment.
+#                 Eg. `script/console --docker`
+#                 Or, add this as a global variable to your shell so it's set
+#                 automatically.
 
 set -e
 
+# Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/.."
 
-ENVIRONMENT=$1
-
-if [ -n "$ENVIRONMENT" ]; then
-  case "$ENVIRONMENT" in
-    *)
-      echo "Unknown environment '$ENVIRONMENT'"
-      exit 1
+echo "==> Loading command line options…"
+DOCKER=${PREFER_DOCKER_FOR_DXW_RAILS:-0}
+for arg in "$@"
+do
+  case $arg in
+    --docker)
+      DOCKER=1
+      shift
+      ;;
+    --no-docker)
+      DOCKER=0
+      shift
       ;;
   esac
-else
-  echo "==> Updating..."
-  script/update
+done
 
-  echo "==> Starting a local Rails console..."
-  bundle exec rails console
+if [ "$CI" ]; then
+  echo "==> Running as CI..."
+  script/ci/console
+elif [ "$DOCKER" -eq 1 ]; then
+  echo "==> Running with Docker..."
+  script/docker/console
+else
+  echo "==> Running natively (no docker)..."
+  script/no-docker/console
 fi

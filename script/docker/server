@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Launch the application and any extra required processes locally in docker
+# containers.
+
+set -e
+
+# Enable the running of this script from any subdirectory without moving to root
+cd "$(dirname "$0")/../.."
+
+# INFO: To enable debug prompts (with pry or byebug) we first start the process
+# in the background and then use attach to create an interactive prompt.
+docker-compose up --detach
+
+# TODO: Repace 'rails-template' with application name
+docker attach rails-template_web_1

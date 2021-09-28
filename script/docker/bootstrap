@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Resolve all dependencies that the application requires to run.
+
+set -e
+
+# Enable the running of this script from any subdirectory without moving to root
+cd "$(dirname "$0")/../.."
+
+echo "==> Rebuilding Docker image to provision all dependencies..."
+docker-compose build web

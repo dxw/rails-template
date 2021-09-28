@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Run the test suite for the application. Optionally pass in a path to an
+# individual test file to run a single test.
+
+set -e
+
+# Enable the running of this script from any subdirectory without moving to root
+cd "$(dirname "$0")/../.."
+
+if [ -n "$DEBUG" ]; then
+  set -x
+fi
+
+echo "==> Updating..."
+script/no-docker/update
+
+AUTOMATICALLY_FIX_LINTING=true script/run_all_tests "$@"

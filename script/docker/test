@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Run the test suite for the application in docker containers.
+
+set -e
+
+# Enable the running of this script from any subdirectory without moving to root
+cd "$(dirname "$0")/../.."
+
+docker-compose -f docker-compose.test.yml \
+               run --rm test \
+               script/run_all_tests "$@"

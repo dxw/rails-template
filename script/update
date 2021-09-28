@@ -4,13 +4,28 @@
 
 set -e
 
+# Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/.."
 
-echo "==> Bootstrapping..."
-script/bootstrap
+echo "==> Loading command line options…"
+DOCKER=${PREFER_DOCKER_FOR_DXW_RAILS:-0}
+for arg in "$@"
+do
+  case $arg in
+    --docker)
+      DOCKER=1
+      ;;
+    --no-docker)
+      DOCKER=0
+      ;;
+  esac
+  shift
+done
 
-echo "==> Running database migrations..."
-bundle exec rails db:migrate
-
-echo "==> Running test database migrations..."
-RAILS_ENV="test" bundle exec rails db:migrate
+if [ "$DOCKER" -eq 1 ]; then
+  echo "==> Running with Docker..."
+  script/docker/update "$@"
+else
+  echo "==> Running natively (no docker)..."
+  script/no-docker/update "$@"
+fi

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Setup environment for CI to run tests. This is primarily designed to run on
+# the continuous integration server.
+
+set -e
+
+docker-compose -f docker-compose.ci.yml -p app build
