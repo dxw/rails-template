@@ -1,0 +1,18 @@
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+
+jobs:
+  label-as-too-new-to-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Label as "too-new-to-merge"
+        uses: andymckay/labeler@1.0.3
+        with:
+          add-labels: "too-new-to-merge"
+          ignore-if-assigned: false
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
