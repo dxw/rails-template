@@ -3,11 +3,11 @@
 # Run the test suite for the application. Optionally pass in a path to an
 # individual test file to run a single test.
 
-TEST_FILE=$1
+TEST_FILES=$1
 
-if [ -n "$TEST_FILE" ]; then
-  echo "==> Running the tests matching '$TEST_FILE'..."
-  bundle exec rspec --pattern "$TEST_FILE"
+if [ -n "$TEST_FILES" ]; then
+  echo "==> Running the tests matching '$TEST_FILES'..."
+  bundle exec rspec "$TEST_FILES"
 else
   if [ -n "$AUTOMATICALLY_FIX_LINTING" ]; then
     echo "==> Formatting files..."
