@@ -1,1 +1,24 @@
-<h3>Welcome</h3>
+<!-- TODO: Remove template home page and any assets -->
+<section class="container">
+  <div class="row">
+    <aside class="col">
+      <%= image_tag("dxw-logo-512x512.png") %>
+    </aside>
+    <article class="col">
+      <h1>Rails Template</h1>
+      <p>Welcome to dxw's template. This application contains our latest defaults for use when starting a new repository to get going as quickly as possible.</p>
+      <p>On first use please refer to the template <%= link_to "README", "https://github.com/dxw/rails-template", target: :blank %> for further instructions.
+      <p>This home page should be removed during initial set up.</p>
+
+      <h2>Helpful links</h2>
+      <ul>
+        <li>
+          <%= link_to "Arcitecture decision records", "https://github.com/dxw/rails-template/tree/develop/doc/architecture/decisions" %>
+        </li>
+        <li>
+          <%= link_to "dxw RFCs", "https://github.com/dxw/tech-team-rfcs/" %>
+        </li>
+      </ul>
+    </article>
+  </div>
+</section>

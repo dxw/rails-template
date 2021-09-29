@@ -6,6 +6,7 @@
       <%= content_for?(:title) ? yield(:title) : I18n.t("app.name") %>
     </title>
     <meta content="<%= content_for?(:description) ? yield(:description) : I18n.t("app.name") %>" name="description"/>
+    <%= favicon_link_tag asset_path('favicon-32x32.png'), :rel => 'icon', :type =>  'image/png' %>
     <%= stylesheet_link_tag "application", media: 'all', "data-turbolinks-track" => "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
     <%= csrf_meta_tags %>
