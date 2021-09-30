@@ -3,6 +3,7 @@ services:
   test:
     build:
       context: .
+      target: test
       args:
         RAILS_ENV: "test"
       cache_from:
