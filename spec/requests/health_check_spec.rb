@@ -1,6 +1,4 @@
-require "rails_helper"
-
-RSpec.describe "Health Check", type: :request do
+RSpec.describe "Health Check" do
   it "returns an ok HTTP status code without requiring authentication" do
     get "/health_check", headers: {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
     expect(response).to have_http_status(:ok)
