@@ -10,4 +10,6 @@
 
 ## Next steps
 
-- [ ] Run any necessary [accessibility testing](https://playbook.dxw.com/guides/web-accessibility.html) on this feature.
+- [ ] Run any necessary
+      [accessibility testing](https://playbook.dxw.com/guides/web-accessibility.html)
+      on this feature.
