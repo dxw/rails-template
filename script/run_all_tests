@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -e
 # Run the test suite for the application. Optionally pass in a path to an
 # individual test file to run a single test.
 
@@ -45,3 +45,5 @@ else
   echo "==> Running Brakeman..."
   bundle exec brakeman -o /dev/stdout
 fi
+
+echo "All linters and tests passed."

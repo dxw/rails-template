@@ -9,4 +9,4 @@ cd "$(dirname "$0")/../.."
 
 docker-compose -f docker-compose.test.yml \
                run --rm test \
-               script/run_all_tests "$@"
+               script/test_wrapper "$@"

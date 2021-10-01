@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if script/run_all_tests "$@"; then
+  echo -e "\033[42m\033[30m     Tests passed! :)     \033[0m"
+  exit 0
+else
+  echo -e "\033[101m\033[30m     Tests did not pass     \033[0m"
+  exit 1
+fi
