@@ -18,10 +18,7 @@ else
   fi
 
   echo "==> Running ShellCheck..."
-  for file in $(git ls-files script/*)
-  do
-    shellcheck $file
-  done
+  find script -type f -exec shellcheck {} +
 
   if [ -n "$AUTOMATICALLY_FIX_LINTING" ]; then
     echo "==> Linting Ruby in fix mode..."
