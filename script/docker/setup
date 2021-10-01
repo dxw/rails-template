@@ -9,6 +9,6 @@ set -e
 cd "$(dirname "$0")/../.."
 
 echo "==> Tearing down any previous application state..."
-docker-compose down -v
+docker-compose down --volumes --remove-orphans
 
 script/docker/bootstrap
