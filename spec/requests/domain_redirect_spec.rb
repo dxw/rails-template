@@ -1,6 +1,4 @@
-require "rails_helper"
-
-RSpec.describe "Canonical domain redirect", type: :request do
+RSpec.describe "Canonical domain redirect" do
   before(:all) do
     ENV["CANONICAL_HOSTNAME"] = "http://example.com"
     Rails.application.reload_routes!
