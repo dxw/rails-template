@@ -15,4 +15,4 @@ fi
 echo "==> Updating..."
 script/no-docker/update
 
-AUTOMATICALLY_FIX_LINTING=true script/run_all_tests "$@"
+AUTOMATICALLY_FIX_LINTING=true script/all/test "$@"
