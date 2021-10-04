@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Source this in a script to process standard arguments for it.
+
+set -e
+
+echo "==> Loading command line options..."
+DOCKER=${PREFER_DOCKER_FOR_DXW_RAILS:-0}
+for arg in "$@"
+do
+  case $arg in
+    --docker)
+      DOCKER=1
+      ;;
+    --no-docker)
+      # shellcheck disable=SC2034
+      DOCKER=0
+      ;;
+    *)
+      # Stop processing arguments so we pass them on
+      break
+      ;;
+  esac
+  shift
+done
