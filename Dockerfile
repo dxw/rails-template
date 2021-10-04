@@ -8,10 +8,9 @@ RUN curl -L https://deb.nodesource.com/setup_16.x | bash -
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
-RUN apt-get update && apt-get install -qq -y \
+RUN apt-get update && apt-get install -y --fix-missing --no-install-recommends \
   build-essential \
-  libpq-dev \
-  --fix-missing --no-install-recommends
+  libpq-dev
 
 ENV APP_HOME /srv/app
 ENV DEPS_HOME /deps
@@ -108,7 +107,7 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 FROM web as test
 
-RUN apt-get install -qq -y shellcheck
+RUN apt-get update && apt-get install -y shellcheck
 
 COPY package.json ${APP_HOME}/package.json
 COPY yarn.lock ${APP_HOME}/yarn.lock
