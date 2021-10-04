@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Base
 # ------------------------------------------------------------------------------
-FROM ruby:2.7.2 as base
+FROM ruby:2.7.4 as base
 MAINTAINER dxw <rails@dxw.com>
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
