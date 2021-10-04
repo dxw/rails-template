@@ -80,7 +80,9 @@ RUN mkdir -p tmp/pids
 # This must be ordered before rake assets:precompile
 RUN cp -R $DEPS_HOME/node_modules $APP_HOME/node_modules
 
-RUN RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE="secret" bundle exec rake assets:precompile --quiet
+RUN if [ "$RAILS_ENV" = "production" ]; then \
+  RAILS_ENV="production" SECRET_KEY_BASE="secret" bundle exec rake assets:precompile; \
+  fi
 
 # TODO:
 # In order to expose the current git sha & time of build in the /healthcheck
