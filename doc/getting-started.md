@@ -36,7 +36,10 @@ $ script/update
 
 ## With Docker
 
-Docker is made available to run these commands locally as containerisation [MUST be used on CI and SHOULD be used on live environments](https://github.com/dxw/tech-team-rfcs/blob/main/rfc-013-use-docker-to-deploy-and-run-applications-in-containers.md). Using Docker locally provides the strongest parity between development and live. It can also be more stable to get running on your machine.
+Docker is made available to run these commands locally as containerisation
+[MUST be used on CI and SHOULD be used on live environments](https://github.com/dxw/tech-team-rfcs/blob/main/rfc-013-use-docker-to-deploy-and-run-applications-in-containers.md).
+Using Docker locally provides the strongest parity between development and live.
+It can also be more stable to get running on your machine.
 
 Running the tests regularly should be done without Docker as it is much faster.
 
