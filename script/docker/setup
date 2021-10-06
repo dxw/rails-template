@@ -11,4 +11,4 @@ cd "$(dirname "$0")/../.."
 echo "==> Tearing down any previous application state..."
 docker-compose down -v
 
-script/bootstrap
+script/docker/bootstrap
