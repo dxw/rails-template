@@ -40,18 +40,12 @@ jobs:
           reactions:
             ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN && '+1' || '-1' }}
 
+      - if: "! env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN"
+        name: Return a failing state if we have no token
+        run: exit 1
+
   rebase:
     needs: check-token
-    if: |
-      (
-        (
-          github.event.issue.pull_request &&
-          contains(github.event.comment.body, '/rebase')
-        ) ||
-        github.event_name == 'pull_request_target'
-      ) &&
-      env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN
-
     name: Rebase
 
     runs-on: ubuntu-latest
