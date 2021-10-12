@@ -2,7 +2,7 @@
 # Base
 # ------------------------------------------------------------------------------
 FROM ruby:2.7.4 as base
-MAINTAINER dxw <rails@dxw.com>
+LABEL org.opencontainers.image.authors="contact@dxw.com"
 
 RUN curl -L https://deb.nodesource.com/setup_16.x | bash -
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
