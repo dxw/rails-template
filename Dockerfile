@@ -102,13 +102,13 @@ RUN \
 # TODO:
 # In order to expose the current git sha & time of build in the /healthcheck
 # endpoint, pass these values into your deployment script, for example:
-# --build-arg current_sha="$GITHUB_SHA" \
-# --build-arg time_of_build="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
-ARG current_sha
-ARG time_of_build
+# --build-arg CURRENT_GIT_SHA="$GITHUB_SHA" \
+# --build-arg TIME_OF_BUILD="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+ARG CURRENT_GIT_SHA
+ARG TIME_OF_BUILD
 
-ENV CURRENT_SHA=$current_sha
-ENV TIME_OF_BUILD=$time_of_build
+ENV CURRENT_GIT_SHA ${CURRENT_GIT_SHA}
+ENV TIME_OF_BUILD ${TIME_OF_BUILD}
 
 # db setup
 COPY ./docker-entrypoint.sh /
