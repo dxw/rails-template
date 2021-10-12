@@ -6,9 +6,13 @@ LABEL org.opencontainers.image.authors="contact@dxw.com"
 
 RUN curl -L https://deb.nodesource.com/setup_16.x | bash -
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
+  tee /etc/apt/sources.list.d/yarn.list
 
-RUN apt-get update && apt-get install -y --fix-missing --no-install-recommends \
+RUN \
+  apt-get update && \
+  apt-get install -y --fix-missing --no-install-recommends \
   build-essential \
   libpq-dev
 
@@ -80,8 +84,10 @@ RUN mkdir -p tmp/pids
 # This must be ordered before rake assets:precompile
 RUN cp -R $DEPS_HOME/node_modules $APP_HOME/node_modules
 
-RUN if [ "$RAILS_ENV" = "production" ]; then \
-  RAILS_ENV="production" SECRET_KEY_BASE="secret" bundle exec rake assets:precompile; \
+RUN \
+  if [ "$RAILS_ENV" = "production" ]; then \
+  SECRET_KEY_BASE="secret" \
+  bundle exec rake assets:precompile; \
   fi
 
 # TODO:
