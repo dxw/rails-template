@@ -110,7 +110,6 @@ ARG TIME_OF_BUILD
 ENV CURRENT_GIT_SHA ${CURRENT_GIT_SHA}
 ENV TIME_OF_BUILD ${TIME_OF_BUILD}
 
-# db setup
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
