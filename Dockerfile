@@ -28,10 +28,10 @@ ENV NODE_ENV ${RAILS_ENV:-production}
 # ------------------------------------------------------------------------------
 FROM base AS dependencies
 
-RUN mkdir -p ${DEPS_HOME}
-WORKDIR $DEPS_HOME
+RUN apt-get update && apt-get install -y yarn
 
-RUN apt-get update && apt install -y yarn
+RUN mkdir -p ${DEPS_HOME}
+WORKDIR ${DEPS_HOME}
 
 # Install Javascript dependencies
 COPY yarn.lock $DEPS_HOME/yarn.lock
@@ -53,10 +53,20 @@ RUN bundle install --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 # Web
 # ------------------------------------------------------------------------------
-FROM dependencies AS web
+FROM base AS web
 
 RUN mkdir -p ${APP_HOME}
 WORKDIR ${APP_HOME}
+
+# Copy dependencies (relying on dependencies using the same base image as this)
+COPY --from=dependencies ${DEPS_HOME}/Gemfile ${APP_HOME}/Gemfile
+COPY --from=dependencies ${DEPS_HOME}/Gemfile.lock ${APP_HOME}/Gemfile.lock
+COPY --from=dependencies ${GEM_HOME} ${GEM_HOME}
+
+COPY --from=dependencies ${DEPS_HOME}/package.json ${APP_HOME}/package.json
+COPY --from=dependencies ${DEPS_HOME}/yarn.lock ${APP_HOME}/yarn.lock
+COPY --from=dependencies ${DEPS_HOME}/node_modules ${APP_HOME}/node_modules
+# End
 
 # Copy app code (sorted by vague frequency of change for caching)
 RUN mkdir -p ${APP_HOME}/log
@@ -64,10 +74,6 @@ RUN mkdir -p ${APP_HOME}/tmp
 
 COPY config.ru ${APP_HOME}/config.ru
 COPY Rakefile ${APP_HOME}/Rakefile
-
-COPY Gemfile $APP_HOME/Gemfile
-COPY Gemfile.lock $APP_HOME/Gemfile.lock
-
 COPY public ${APP_HOME}/public
 COPY vendor ${APP_HOME}/vendor
 COPY bin ${APP_HOME}/bin
@@ -80,9 +86,6 @@ COPY app ${APP_HOME}/app
 
 # Create tmp/pids
 RUN mkdir -p tmp/pids
-
-# This must be ordered before rake assets:precompile
-RUN cp -R $DEPS_HOME/node_modules $APP_HOME/node_modules
 
 RUN \
   if [ "$RAILS_ENV" = "production" ]; then \
@@ -115,10 +118,11 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 FROM web as test
 
-RUN apt-get update && apt-get install -y shellcheck
-
-COPY package.json ${APP_HOME}/package.json
-COPY yarn.lock ${APP_HOME}/yarn.lock
+RUN \
+  apt-get update && \
+  apt-get install -y \
+  shellcheck \
+  yarn
 
 COPY .eslintignore ${APP_HOME}/.eslintignore
 COPY .eslintrc.json ${APP_HOME}/.eslintrc.json
