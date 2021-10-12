@@ -32,22 +32,30 @@ RUN apt-get update && apt-get install -y yarn
 
 WORKDIR ${DEPS_HOME}
 
-# Install Javascript dependencies
-COPY yarn.lock $DEPS_HOME/yarn.lock
-COPY package.json $DEPS_HOME/package.json
-RUN yarn install
-
 # Install Ruby dependencies
-COPY Gemfile $DEPS_HOME/Gemfile
-COPY Gemfile.lock $DEPS_HOME/Gemfile.lock
-RUN gem update --system
-RUN gem install bundler -v 2.2.16
+ENV BUNDLE_GEM_GROUPS ${RAILS_ENV}
 
-ENV BUNDLE_GEM_GROUPS=$RAILS_ENV
+COPY Gemfile ${DEPS_HOME}/Gemfile
+COPY Gemfile.lock ${DEPS_HOME}/Gemfile.lock
+
+RUN gem install bundler -v 2.2.16
 RUN bundle config set frozen "true"
 RUN bundle config set no-cache "true"
-RUN bundle config set with $BUNDLE_GEM_GROUPS
+RUN bundle config set with "${BUNDLE_GEM_GROUPS}"
 RUN bundle install --retry=10 --jobs=4
+# End
+
+# Install Javascript dependencies
+COPY yarn.lock ${DEPS_HOME}/yarn.lock
+COPY package.json ${DEPS_HOME}/package.json
+
+RUN \
+  if [ ${RAILS_ENV} = "production" ]; then \
+  yarn install --frozen-lockfile --production; \
+  else \
+  yarn install --frozen-lockfile; \
+  fi
+# End
 
 # ------------------------------------------------------------------------------
 # Web
