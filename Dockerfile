@@ -30,7 +30,6 @@ FROM base AS dependencies
 
 RUN apt-get update && apt-get install -y yarn
 
-RUN mkdir -p ${DEPS_HOME}
 WORKDIR ${DEPS_HOME}
 
 # Install Javascript dependencies
@@ -55,7 +54,6 @@ RUN bundle install --retry=10 --jobs=4
 # ------------------------------------------------------------------------------
 FROM base AS web
 
-RUN mkdir -p ${APP_HOME}
 WORKDIR ${APP_HOME}
 
 # Copy dependencies (relying on dependencies using the same base image as this)
