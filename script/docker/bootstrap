@@ -7,5 +7,8 @@ set -e
 # Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/../.."
 
-echo "==> Rebuilding Docker image to provision all dependencies..."
+echo "==> Building web Docker image..."
 docker-compose build web
+
+echo "==> Building test Docker image..."
+docker-compose -f docker-compose.test.yml build test

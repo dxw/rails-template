@@ -9,6 +9,8 @@ set -e
 cd "$(dirname "$0")/../.."
 
 echo "==> Tearing down any previous application state..."
-docker-compose down --rmi local --volumes --remove-orphans
+for file in docker-compose.yml docker-compose.test.yml; do
+  docker-compose -f $file down --rmi local --volumes --remove-orphans
+done
 
 script/docker/bootstrap
