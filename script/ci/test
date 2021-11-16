@@ -9,4 +9,4 @@ set -e
 docker-compose -f docker-compose.ci.yml \
                -p app \
                run --rm test \
-               script/run_all_tests "$@"
+               script/all/test "$@"

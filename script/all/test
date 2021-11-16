@@ -3,6 +3,8 @@
 # Run the test suite for the application. Optionally pass in a path to an
 # individual test file to run a single test.
 
+set -e
+
 TEST_FILES=$1
 
 if [ -n "$TEST_FILES" ]; then
