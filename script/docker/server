@@ -13,4 +13,4 @@ cd "$(dirname "$0")/../.."
 docker-compose up --detach
 
 # TODO: Repace 'rails-template' with application name
-docker attach rails-template_web_1
+docker attach rails-template-web-1
