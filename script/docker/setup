@@ -13,4 +13,4 @@ for file in docker-compose.yml docker-compose.test.yml; do
   docker-compose -f $file down --rmi local --volumes --remove-orphans
 done
 
-script/docker/bootstrap
+script/docker/bootstrap --no-docker-cache

@@ -7,8 +7,21 @@ set -e
 # Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/../.."
 
-echo "==> Building web Docker image..."
-docker-compose build web
+DOCKER_BUILD_ARGS=
+for arg in "$@"; do
+  case $arg in
+  --no-docker-cache)
+    DOCKER_BUILD_ARGS="--no-cache $DOCKER_BUILD_ARGS"
+    ;;
+  esac
+  shift
+done
 
-echo "==> Building test Docker image..."
-docker-compose -f docker-compose.test.yml build test
+for file_and_image in docker-compose.yml:web docker-compose.test.yml:test; do
+  file=${file_and_image%:*}
+  image=${file_and_image#*:}
+
+  echo "==> Building $file_and_image Docker image..."
+  # shellcheck disable=SC2086
+  docker-compose -f $file build $DOCKER_BUILD_ARGS $image
+done
