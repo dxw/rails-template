@@ -22,7 +22,7 @@ else
   echo "==> Running ShellCheck..."
   for file in $(git ls-files script/*)
   do
-    shellcheck "$file"
+    shellcheck -x "$file"
   done
 
   if [ -n "$AUTOMATICALLY_FIX_LINTING" ]; then
