@@ -29,6 +29,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
+      POSTGRES_DB: app-test
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_HOST_AUTH_METHOD: trust

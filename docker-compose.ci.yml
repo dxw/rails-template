@@ -28,6 +28,7 @@ services:
   test-db:
     image: postgres
     environment:
+      POSTGRES_DB: app-test
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_HOST_AUTH_METHOD: trust
