@@ -27,8 +27,6 @@ services:
 
   test-db:
     image: postgres
-    volumes:
-      - db-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
@@ -38,5 +36,3 @@ services:
 
 networks:
   test:
-volumes:
-  db-data:
