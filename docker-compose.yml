@@ -31,6 +31,7 @@ services:
     environment:
       # TODO: Update rails-template with application name
       POSTGRES_DB: rails-template-development
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_HOST_AUTH_METHOD: trust
     networks:
