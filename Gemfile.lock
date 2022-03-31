@@ -101,7 +101,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     crass (1.0.6)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
@@ -143,7 +143,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    lograge (0.11.2)
+    lograge (0.12.0)
       actionpack (>= 4)
       activesupport (>= 4)
       railties (>= 4)
@@ -216,7 +216,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.2.1)
-    request_store (1.5.0)
+    request_store (1.5.1)
       rack (>= 1.4)
     rexml (3.2.5)
     rollbar (3.3.0)
@@ -334,7 +334,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   listen (>= 3.0.5, < 3.8)
-  lograge (~> 0.11)
+  lograge (~> 0.12)
   mini_racer
   pg
   pry-rails
