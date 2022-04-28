@@ -95,7 +95,8 @@ COPY app ${APP_HOME}/app
 # Create tmp/pids
 RUN mkdir -p tmp/pids
 
-RUN yarn run build
+RUN yarn run build && \
+  yarn run build:css
 
 RUN \
   if [ "$RAILS_ENV" = "production" ]; then \
