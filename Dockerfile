@@ -16,6 +16,8 @@ RUN \
   build-essential \
   libpq-dev
 
+RUN apt-get update && apt-get install -y yarn
+
 ENV APP_HOME /srv/app
 ENV DEPS_HOME /deps
 
@@ -27,8 +29,6 @@ ENV NODE_ENV ${RAILS_ENV:-production}
 # Dependencies
 # ------------------------------------------------------------------------------
 FROM base AS dependencies
-
-RUN apt-get update && apt-get install -y yarn
 
 WORKDIR ${DEPS_HOME}
 

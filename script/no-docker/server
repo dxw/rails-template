@@ -11,4 +11,4 @@ echo "==> Updating..."
 script/no-docker/update
 
 echo "==> Starting the development server..."
-bundle exec rails server
+./bin/dev
