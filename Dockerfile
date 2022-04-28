@@ -85,6 +85,7 @@ COPY script ${APP_HOME}/script
 COPY public ${APP_HOME}/public
 COPY vendor ${APP_HOME}/vendor
 COPY bin ${APP_HOME}/bin
+COPY rollup.config.js ${APP_HOME}/rollup.config.js
 COPY config ${APP_HOME}/config
 COPY lib ${APP_HOME}/lib
 COPY db ${APP_HOME}/db
@@ -93,6 +94,8 @@ COPY app ${APP_HOME}/app
 
 # Create tmp/pids
 RUN mkdir -p tmp/pids
+
+RUN yarn run build
 
 RUN \
   if [ "$RAILS_ENV" = "production" ]; then \
