@@ -380,6 +380,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
+  sprockets-rails
   standard
   turbolinks (~> 5)
   tzinfo-data
