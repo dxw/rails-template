@@ -23,20 +23,17 @@ services:
       CI: "true"
       AUTOMATICALLY_FIX_LINTING: "false"
     networks:
-      - test
+      - test-ci
 
   test-db:
     image: postgres
-    volumes:
-      - db-data:/var/lib/postgresql/data
     environment:
+      POSTGRES_DB: app-test
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_HOST_AUTH_METHOD: trust
     networks:
-      - test
+      - test-ci
 
 networks:
-  test:
-volumes:
-  db-data:
+  test-ci:
