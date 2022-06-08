@@ -19,9 +19,8 @@ RUN \
 ENV APP_HOME /srv/app
 ENV DEPS_HOME /deps
 
-ARG RAILS_ENV
-ENV RAILS_ENV ${RAILS_ENV:-production}
-ENV NODE_ENV ${RAILS_ENV:-production}
+ENV RAILS_ENV production
+ENV NODE_ENV production
 
 # ------------------------------------------------------------------------------
 # Dependencies
@@ -42,7 +41,7 @@ RUN gem update --system 3.3.5
 RUN gem install bundler -v 2.3.5
 RUN bundle config set frozen "true"
 RUN bundle config set no-cache "true"
-RUN bundle config set with "${BUNDLE_GEM_GROUPS}"
+RUN bundle config set without development test
 RUN bundle install --retry=10 --jobs=4
 # End
 
