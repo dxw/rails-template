@@ -4,8 +4,6 @@ services:
     build:
       context: .
       target: test
-      args:
-        RAILS_ENV: "test"
       cache_from:
         - app_test:latest
     image: app_test

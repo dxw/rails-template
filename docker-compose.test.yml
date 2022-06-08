@@ -4,8 +4,6 @@ services:
     build:
       context: .
       target: test
-      args:
-        RAILS_ENV: "test"
     command: bundle exec rake
     ports:
       - "3000:3000"
