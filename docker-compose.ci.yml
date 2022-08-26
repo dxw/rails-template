@@ -21,7 +21,6 @@ services:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       SECRET_KEY_BASE: secret
       CI: "true"
-      AUTOMATICALLY_FIX_LINTING: "false"
     networks:
       - test-ci
 

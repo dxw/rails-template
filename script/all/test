@@ -2,6 +2,9 @@
 
 # Run the test suite for the application. Optionally pass in a path to an
 # individual test file to run a single test.
+#
+# To automtically fix linter errors, set AUTOMATICALLY_FIX_LINTING=true, to not
+# automatically fix linter errors, do not set AUTOMATICALLY_FIX_LINTING.
 
 set -e
 
