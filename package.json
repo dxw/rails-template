@@ -5,12 +5,18 @@
     "lint:format": "prettier --check '**/*'",
     "lint:format:fix": "prettier --write '**/*'",
     "lint:js": "eslint .",
-    "lint:js:fix": "yarn run lint:js --fix"
+    "lint:js:fix": "yarn run lint:js --fix",
+    "lint:css": "npx stylelint \"app/**/*css\"",
+    "lint:css:fix": "npx stylelint \"app/**/*css\" --fix"
   },
   "dependencies": {},
   "devDependencies": {
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "stylelint": "^14.12.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^28.0.0",
+    "stylelint-config-standard-scss": "^5.0.0"
   }
 }
