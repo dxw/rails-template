@@ -24,7 +24,7 @@ jobs:
     steps:
       - if: "! env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN"
         name: Prompt to add a token
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.issue.number || github.event.number }}
           body: |
@@ -34,7 +34,7 @@ jobs:
 
       - if: github.event.comment
         name: React to the triggering comment
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions:
@@ -63,7 +63,7 @@ jobs:
 
       - if: failure()
         name: Notify of the failure
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.issue.number || github.event.number }}
           body: |
@@ -73,7 +73,7 @@ jobs:
 
       - if: success() && github.event.comment
         name: React to the triggering comment
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: hooray
