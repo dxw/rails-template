@@ -44,6 +44,15 @@ else
     yarn run lint:js
   fi
 
+  if [ -n "$AUTOMATICALLY_FIX_LINTING" ]; then
+    echo "==> Linting CSS in fix mode..."
+    yarn run lint:css:fix
+  else
+    echo "==> Linting CSS..."
+    yarn run lint:css
+  fi
+
+
   echo "==> Running the tests..."
   bundle exec rspec
 
