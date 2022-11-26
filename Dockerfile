@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Base
 # ------------------------------------------------------------------------------
-FROM ruby:2.7.4 as base
+FROM ruby:2.7.7 as base
 LABEL org.opencontainers.image.authors="contact@dxw.com"
 
 RUN curl -L https://deb.nodesource.com/setup_16.x | bash -
