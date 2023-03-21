@@ -12,7 +12,7 @@
   "dependencies": {},
   "devDependencies": {
     "eslint": "^8.18.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^8.8.0",
     "prettier": "^2.7.1",
     "stylelint": "^14.12.1",
     "stylelint-config-prettier": "^9.0.3",
