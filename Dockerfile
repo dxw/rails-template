@@ -6,6 +6,17 @@ LABEL org.opencontainers.image.authors="contact@dxw.com"
 
 RUN \
   apt-get update && \
+  apt-get install -y ca-certificates curl gnupg && \
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | \
+  gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | \
+  tee /etc/apt/sources.list.d/nodesource.list && \
+  apt-get update && \
+  apt-get install nodejs -y && \
+  npm install --global yarn
+
+RUN \
+  apt-get update && \
   apt-get install -y --fix-missing --no-install-recommends \
   build-essential \
   libpq-dev
@@ -23,17 +34,6 @@ ENV NODE_ENV ${RAILS_ENV:-production}
 FROM base AS dependencies
 
 WORKDIR ${DEPS_HOME}
-
-RUN \
-  apt-get update && \
-  apt-get install -y ca-certificates curl gnupg && \
-  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | \
-  gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | \
-  tee /etc/apt/sources.list.d/nodesource.list && \
-  apt-get update && \
-  apt-get install nodejs -y && \
-  npm install --global yarn
 
 # Install Ruby dependencies
 ENV BUNDLE_GEM_GROUPS ${RAILS_ENV}
