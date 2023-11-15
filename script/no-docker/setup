@@ -22,7 +22,7 @@ bundle exec rails db:drop
 DB_DROP_RESULT=$?
 set -e
 
-if [ -z "$CI" ] && [ -n "$DB_DROP_RESULT" ]; then
+if [ -z "$CI" ] && [ "$DB_DROP_RESULT" != 0 ]; then
   printf "\\nDatabase drop failed. Continue anyway? [y/N] "
   read -r
 
@@ -44,7 +44,7 @@ RAILS_ENV="test" bundle exec rails db:drop
 DB_DROP_RESULT=$?
 set -e
 
-if [ -z "$CI" ] && [ -n "$DB_DROP_RESULT" ]; then
+if [ -z "$CI" ] && [ "$DB_DROP_RESULT" != 0 ]; then
   printf "\\nDatabase drop failed. Continue anyway? [y/N] "
   read -r
 
