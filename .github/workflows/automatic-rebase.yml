@@ -57,7 +57,7 @@ jobs:
           fetch-depth: 0
 
       - name: Rebase on top of the default branch
-        uses: cirrus-actions/rebase@1.7
+        uses: cirrus-actions/rebase@1.8
         env:
           GITHUB_TOKEN: ${{ env.AUTO_REBASE_PERSONAL_ACCESS_TOKEN }}
 
