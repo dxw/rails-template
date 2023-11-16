@@ -266,7 +266,7 @@ GEM
     regexp_parser (2.7.0)
     request_store (1.5.1)
       rack (>= 1.4)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rollbar (3.4.1)
     rouge (1.11.1)
     rspec-core (3.12.2)
@@ -314,7 +314,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    selenium-webdriver (4.8.1)
+    selenium-webdriver (4.8.6)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -356,7 +356,7 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
     webrick (1.8.1)
-    websocket (1.2.9)
+    websocket (1.2.10)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
