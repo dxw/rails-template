@@ -4,7 +4,7 @@
 FROM ruby:3.2.2 as base
 LABEL org.opencontainers.image.authors="contact@dxw.com"
 
-RUN curl -L https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -L https://deb.nodesource.com/setup_20.x | bash -
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
@@ -38,8 +38,8 @@ ENV BUNDLE_GEM_GROUPS ${RAILS_ENV}
 COPY Gemfile ${DEPS_HOME}/Gemfile
 COPY Gemfile.lock ${DEPS_HOME}/Gemfile.lock
 
-RUN gem update --system 3.3.5
-RUN gem install bundler -v 2.3.5
+RUN gem update --system 3.5.1
+RUN gem install bundler -v 2.4.7
 RUN bundle config set frozen "true"
 RUN bundle config set no-cache "true"
 RUN bundle config set with "${BUNDLE_GEM_GROUPS}"
