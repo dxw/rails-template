@@ -9,4 +9,4 @@
   this.App || (this.App = {});
 
   this.App.cable = this.ActionCable.createConsumer();
-}.call(this));
+}).call(this);
