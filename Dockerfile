@@ -19,9 +19,8 @@ RUN \
 ENV APP_HOME /srv/app
 ENV DEPS_HOME /deps
 
-ARG RAILS_ENV
-ENV RAILS_ENV ${RAILS_ENV:-production}
-ENV NODE_ENV ${RAILS_ENV:-production}
+ENV RAILS_ENV=production
+ENV NODE_ENV=production
 
 # ------------------------------------------------------------------------------
 # Dependencies
@@ -42,7 +41,7 @@ RUN gem update --system 3.5.1
 RUN gem install bundler -v 2.4.7
 RUN bundle config set frozen "true"
 RUN bundle config set no-cache "true"
-RUN bundle config set with "${BUNDLE_GEM_GROUPS}"
+RUN bundle config set without development test
 RUN bundle install --retry=10 --jobs=4
 # End
 
@@ -50,18 +49,12 @@ RUN bundle install --retry=10 --jobs=4
 COPY yarn.lock ${DEPS_HOME}/yarn.lock
 COPY package.json ${DEPS_HOME}/package.json
 
-RUN \
-  if [ ${RAILS_ENV} = "production" ]; then \
-  yarn install --frozen-lockfile --production; \
-  else \
-  yarn install --frozen-lockfile; \
-  fi
-# End
+RUN yarn install --frozen-lockfile --production
 
 # ------------------------------------------------------------------------------
-# Web
+# Production
 # ------------------------------------------------------------------------------
-FROM base AS web
+FROM base AS production
 
 WORKDIR ${APP_HOME}
 
@@ -120,9 +113,31 @@ EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server"]
 
 # ------------------------------------------------------------------------------
+# Development
+# ------------------------------------------------------------------------------
+FROM production as development
+
+ENV RAILS_ENV=development
+ENV NODE_ENV=development
+
+RUN bundle config unset without
+RUN bundle config set with development
+RUN bundle install --retry=10 --jobs=4
+
+# Define the runtime command in docker-compose.yml
+CMD ["bundle", "exec", "rails", "console"]
+
+# ------------------------------------------------------------------------------
 # Test
 # ------------------------------------------------------------------------------
-FROM web as test
+FROM production as test
+
+ENV RAILS_ENV=test
+ENV NODE_ENV=test
+
+RUN bundle config unset without
+RUN bundle config set with test
+RUN bundle install --retry=10 --jobs=4
 
 RUN \
   apt-get update && \
@@ -139,3 +154,8 @@ COPY .stylelintignore ${APP_HOME}/.stylelintignore
 
 COPY .rspec ${APP_HOME}/.rspec
 COPY spec ${APP_HOME}/spec
+
+RUN yarn install --frozen-lockfile
+
+# Define the runtime command in docker-compose.test.yml
+CMD ["bundle", "exec", "rake"]
