@@ -24,7 +24,7 @@ set -e
 
 if [ -z "$CI" ] && [ "$DB_DROP_RESULT" != 0 ]; then
   printf "\\nDatabase drop failed. Continue anyway? [y/N] "
-  read -r
+  read -r REPLY
 
   case $REPLY in
     y | Y)
@@ -46,7 +46,7 @@ set -e
 
 if [ -z "$CI" ] && [ "$DB_DROP_RESULT" != 0 ]; then
   printf "\\nDatabase drop failed. Continue anyway? [y/N] "
-  read -r
+  read -r REPLY
 
   case $REPLY in
     y | Y)
