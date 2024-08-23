@@ -6,7 +6,7 @@
 
 set -e
 
-docker-compose -f docker-compose.ci.yml \
+docker compose -f docker-compose.ci.yml \
                -p app \
                run --rm test \
                script/all/test "$@"

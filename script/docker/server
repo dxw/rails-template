@@ -10,7 +10,7 @@ cd "$(dirname "$0")/../.."
 
 # INFO: To enable debug prompts (with pry or byebug) we first start the process
 # in the background and then use attach to create an interactive prompt.
-docker-compose up --detach
+docker compose up --detach
 
 # TODO: Repace 'rails-template' with application name
 docker attach rails-template_web_1
