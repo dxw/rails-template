@@ -41,7 +41,7 @@ Use DotEnv to load our environment variables.
 
 Should Docker and Docker Compose be added to the project the environment
 variables will need to be loaded with
-`docker-compose up --env-file=.env.development` rather than `docker-compose.env`
+`docker compose up --env-file=.env.development` rather than `docker-compose.env`
 which is a pattern we have used. Having 2 files for managing environment
 variables such as `.env*` and `docker-compose.env*` is undesirable due to the
 overhead in keeping these in sync.

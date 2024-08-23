@@ -7,6 +7,6 @@ set -e
 # Enable the running of this script from any subdirectory without moving to root
 cd "$(dirname "$0")/../.."
 
-docker-compose -f docker-compose.test.yml \
+docker compose -f docker-compose.test.yml \
                run --rm test \
                script/all/test "$@"

@@ -5,4 +5,4 @@
 
 set -e
 
-docker-compose -f docker-compose.ci.yml -p app build
+docker compose -f docker-compose.ci.yml -p app build
