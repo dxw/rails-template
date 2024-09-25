@@ -18,26 +18,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - id: cache-docker
-        uses: actions/cache@v3
-        with:
-          path: /tmp/docker-save
-          key:
-            docker-save-${{ hashFiles('Dockerfile', 'Gemfile.lock',
-            'package-lock.json') }}
-
-      - if: steps.cache-docker.outputs.cache-hit == 'true'
-        name: Load cached Docker image
-        run: docker load -i /tmp/docker-save/snapshot.tar || true
-
       - name: Build
         run: script/ci/cibuild
 
       - name: Test
         run: script/ci/test
-
-      - if: always() && steps.cache-docker.outputs.cache-hit != 'true'
-        name: Prepare Docker cache
-        run:
-          mkdir -p /tmp/docker-save && docker save app_test:latest -o
-          /tmp/docker-save/snapshot.tar && ls -lh /tmp/docker-save
