@@ -1,3 +1,4 @@
 {
-  "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier"]
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-standard"],
+  "rules": { "import-notation": "string" }
 }

@@ -1,4 +1,4 @@
-/* stylelint-disable scss/at-extend-no-missing-placeholder */
+/* stylelint-disable scss/at-extend-no-missing-placeholder, at-rule-no-unknown */
 // import the CSS framework
 // Do not use *= require in Sass or your other stylesheets will not be able to access the Bootstrap mixins and variables.
 @import "bootstrap";
@@ -53,4 +53,4 @@ section {
 
   margin-top: 20px;
 }
-/* stylelint-enable scss/at-extend-no-missing-placeholder */
+/* stylelint-enable scss/at-extend-no-missing-placeholder, at-rule-no-unknown */
