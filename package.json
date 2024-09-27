@@ -11,8 +11,11 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^8.18.0",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.11.1",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
+    "globals": "^15.9.0",
     "prettier": "^3.0.0",
     "stylelint": "^15.0.0",
     "stylelint-config-prettier": "^9.0.3",
