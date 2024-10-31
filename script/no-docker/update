@@ -7,6 +7,10 @@ set -e
 echo "==> Bootstrapping..."
 script/no-docker/bootstrap
 
+echo "==> Compiling assets..."
+yarn build
+yarn build:css
+
 echo "==> Running database migrations..."
 bundle exec rails db:migrate
 
