@@ -16,6 +16,10 @@ fi
 echo "==> Bootstrapping..."
 script/no-docker/bootstrap
 
+echo "==> Compiling assets..."
+yarn build
+yarn build:css
+
 echo "==> Dropping database..."
 set +e
 bundle exec rails db:drop
