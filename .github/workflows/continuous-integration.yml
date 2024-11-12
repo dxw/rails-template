@@ -1,5 +1,7 @@
 # TODO: Enable GitHub Actions on the repository to test all pull requests
 # https://github.com/<org>/<repo>/actions
+name: CI Checks
+
 on:
   pull_request:
   push:
@@ -8,18 +10,129 @@ on:
       - develop
 
 jobs:
-  test:
+  build-and-cache:
+    name: Build and cache image
     runs-on: ubuntu-latest
-
-    env:
-      RAILS_ENV: test
-
     steps:
-      - name: Check out code
+      -
+        name: Checkout
         uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and cache image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: RAILS_ENV=test
+          push: false
+          tags: app_test:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=min
 
-      - name: Build
-        run: script/ci/cibuild
+  lint-and-format:
+    name: Linting and format application
+    runs-on: ubuntu-latest
+    needs: build-and-cache
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and cache
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: |
+            RAILS_ENV=test
+          push: false
+          load: true
+          tags: app_test:latest
+          cache-from: type=gha
+      -
+        name: Run linters and formatters
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "bundle exec standardrb -f simple && \
+            yarn run lint:js && \
+            yarn run lint:css && \
+            yarn run lint:format"
 
-      - name: Test
-        run: script/ci/test
+  static-analysis:
+    name: Static analysis
+    runs-on: ubuntu-latest
+    needs: build-and-cache
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and cache
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: |
+            RAILS_ENV=test
+          push: false
+          load: true
+          tags: app_test:latest
+          cache-from: type=gha
+      -
+        name: Run Brakeman
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "bundle exec brakeman -o /dev/stdout"
+
+  specs:
+    name: Specs and coverage
+    runs-on: ubuntu-latest
+    needs: build-and-cache
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and cache
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: |
+            RAILS_ENV=test
+          push: false
+          load: true
+          tags: app_test:latest
+          cache-from: type=gha
+      -
+        name: Run RSpec and Simplecov
+        run: |
+          docker compose -p complete-app -f docker-compose.ci.yml \
+            run --name app_test test /bin/bash -c "bin/rails spec"
+      -
+        name: Shutdown containers
+        run: docker compose -p app_test down && docker compose -p app_test rm
+
+  shellcheck:
+    name: Linting scripts
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Run Shellceck
+        run: |
+          for file in $(git ls-files script/*)
+          do shellcheck -x "$file"
+          done
