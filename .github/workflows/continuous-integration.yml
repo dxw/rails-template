@@ -41,20 +41,8 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
       -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Build and cache
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          build-args: |
-            RAILS_ENV=test
-          push: false
-          load: true
-          tags: app_test:latest
-          cache-from: type=gha
+        name: Load cache
+        uses: ./.github/actions/continuous-integration/load-cache
       -
         name: Run linters and formatters
         run: |
@@ -72,20 +60,8 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
       -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Build and cache
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          build-args: |
-            RAILS_ENV=test
-          push: false
-          load: true
-          tags: app_test:latest
-          cache-from: type=gha
+        name: Load cache
+        uses: ./.github/actions/continuous-integration/load-cache
       -
         name: Run Brakeman
         run: |
@@ -100,20 +76,8 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
       -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Build and cache
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          build-args: |
-            RAILS_ENV=test
-          push: false
-          load: true
-          tags: app_test:latest
-          cache-from: type=gha
+        name: Load cache
+        uses: ./.github/actions/continuous-integration/load-cache
       -
         name: Run RSpec and Simplecov
         run: |
