@@ -1,0 +1,26 @@
+on:
+  workflow_call:
+
+jobs:
+  set-up-post-cache-job:
+    name: Set up post-cache job
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Load cache image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: |
+            RAILS_ENV=test
+          push: false
+          load: true
+          tags: app_test:latest
+          cache-from: type=gha
