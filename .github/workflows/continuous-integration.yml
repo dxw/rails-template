@@ -21,12 +21,21 @@ jobs:
         name: Build and cache
         uses: ./.github/actions/continuous-integration/load-cache
       -
-        name: Run linters and formatters
+        name: Run Ruby standard
         run: |
-          docker run --rm app_test:latest /bin/bash -c "bundle exec standardrb -f simple && \
-            yarn run lint:js && \
-            yarn run lint:css && \
-            yarn run lint:format"
+          docker run --rm app_test:latest /bin/bash -c "bundle exec standardrb -f simple"
+      -
+        name: Run ESLint
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "yarn run lint:js"
+      -
+        name: Run Stylelint
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "yarn run lint:css"
+      -
+        name: Run Prettier
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "yarn run lint:format"
 
   static-analysis:
     name: Static analysis
