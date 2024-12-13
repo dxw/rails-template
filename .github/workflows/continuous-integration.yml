@@ -1,5 +1,7 @@
 # TODO: Enable GitHub Actions on the repository to test all pull requests
 # https://github.com/<org>/<repo>/actions
+name: CI Checks
+
 on:
   pull_request:
   push:
@@ -8,18 +10,77 @@ on:
       - develop
 
 jobs:
-  test:
+  lint-and-format:
+    name: Lint and format application
     runs-on: ubuntu-latest
-
-    env:
-      RAILS_ENV: test
-
     steps:
-      - name: Check out code
+      -
+        name: Checkout
         uses: actions/checkout@v4
+      -
+        name: Build and cache
+        uses: ./.github/actions/continuous-integration/load-cache
+      -
+        name: Run Ruby standard
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "bundle exec standardrb -f simple"
+      -
+        name: Run ESLint
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "yarn run lint:js"
+      -
+        name: Run Stylelint
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "yarn run lint:css"
+      -
+        name: Run Prettier
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "yarn run lint:format"
 
-      - name: Build
-        run: script/ci/cibuild
+  static-analysis:
+    name: Static analysis
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Build and cache
+        uses: ./.github/actions/continuous-integration/load-cache
+      -
+        name: Run Brakeman
+        run: |
+          docker run --rm app_test:latest /bin/bash -c "bundle exec brakeman -o /dev/stdout"
 
-      - name: Test
-        run: script/ci/test
+  specs:
+    name: Specs and coverage
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Build and cache
+        uses: ./.github/actions/continuous-integration/load-cache
+      -
+        name: Run RSpec and Simplecov
+        run: |
+          docker compose -p complete-app -f docker-compose.ci.yml \
+            run --name app_test test /bin/bash -c "bin/rails spec"
+      -
+        name: Shutdown containers
+        run: docker compose -p app_test down && docker compose -p app_test rm
+
+  shellcheck:
+    name: Lint scripts
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Run Shellceck
+        run: |
+          for file in $(git ls-files script/*)
+          do shellcheck -x "$file"
+          done

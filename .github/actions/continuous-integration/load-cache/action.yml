@@ -1,0 +1,20 @@
+name: Build and cache image
+runs:
+  using: "composite"
+  steps:
+    -
+      name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    -
+      name: Build and cache image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: ./Dockerfile
+        build-args: |
+          RAILS_ENV=test
+        push: false
+        load: true
+        tags: app_test:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=min

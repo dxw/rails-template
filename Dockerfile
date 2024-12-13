@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Base
 # ------------------------------------------------------------------------------
-FROM ruby:3.3.6 as base
+FROM ruby:3.3.6 AS base
 LABEL org.opencontainers.image.authors="contact@dxw.com"
 
 COPY .node-version .node-version
@@ -17,12 +17,12 @@ RUN \
   build-essential \
   libpq-dev
 
-ENV APP_HOME /srv/app
-ENV DEPS_HOME /deps
+ENV APP_HOME=/srv/app
+ENV DEPS_HOME=/deps
 
 ARG RAILS_ENV
-ENV RAILS_ENV ${RAILS_ENV:-production}
-ENV NODE_ENV ${RAILS_ENV:-production}
+ENV RAILS_ENV=${RAILS_ENV:-production}
+ENV NODE_ENV=${RAILS_ENV:-production}
 
 # ------------------------------------------------------------------------------
 # Dependencies
@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y yarn
 WORKDIR ${DEPS_HOME}
 
 # Install Ruby dependencies
-ENV BUNDLE_GEM_GROUPS ${RAILS_ENV}
+ENV BUNDLE_GEM_GROUPS=${RAILS_ENV}
 
 COPY Gemfile ${DEPS_HOME}/Gemfile
 COPY Gemfile.lock ${DEPS_HOME}/Gemfile.lock
@@ -109,8 +109,8 @@ RUN \
 ARG CURRENT_GIT_SHA
 ARG TIME_OF_BUILD
 
-ENV CURRENT_GIT_SHA ${CURRENT_GIT_SHA}
-ENV TIME_OF_BUILD ${TIME_OF_BUILD}
+ENV CURRENT_GIT_SHA=${CURRENT_GIT_SHA}
+ENV TIME_OF_BUILD=${TIME_OF_BUILD}
 
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
@@ -123,7 +123,7 @@ CMD ["bundle", "exec", "rails", "server"]
 # ------------------------------------------------------------------------------
 # Test
 # ------------------------------------------------------------------------------
-FROM web as test
+FROM web AS test
 
 RUN \
   apt-get update && \
