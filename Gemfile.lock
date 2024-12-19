@@ -147,7 +147,7 @@ GEM
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
-    irb (1.14.2)
+    irb (1.14.3)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jbuilder (2.13.0)
@@ -218,7 +218,7 @@ GEM
       method_source (~> 1.0)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
-    psych (5.2.1)
+    psych (5.2.2)
       date
       stringio
     public_suffix (6.0.1)
