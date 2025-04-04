@@ -16,7 +16,7 @@ gem "pry-rails"
 gem "mini_racer"
 gem "puma", "~> 6.4"
 gem "rollbar"
-gem "rails", "~> 7.0"
+gem "rails", "~> 8.0"
 gem "sass-rails", "~> 6.0"
 gem "turbolinks", "~> 5"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
