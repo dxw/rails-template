@@ -93,7 +93,7 @@ GEM
     brakeman (7.0.0)
       racc
     builder (3.3.0)
-    bullet (7.2.0)
+    bullet (8.0.2)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (12.0.0)
@@ -118,7 +118,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.3.5)
-    connection_pool (2.4.1)
+    connection_pool (2.5.0)
     crass (1.0.6)
     database_cleaner (2.1.0)
       database_cleaner-active_record (>= 2, < 3)
@@ -170,7 +170,7 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.6.6)
+    logger (1.7.0)
     lograge (0.14.0)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -190,7 +190,7 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.18.1)
       libv8-node (~> 23.6.1.0)
-    minitest (5.25.4)
+    minitest (5.25.5)
     msgpack (1.7.2)
     net-imap (0.4.19)
       date
@@ -324,7 +324,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    securerandom (0.3.2)
+    securerandom (0.4.1)
     selenium-webdriver (4.30.1)
       base64 (~> 0.2)
       logger (~> 1.4)
