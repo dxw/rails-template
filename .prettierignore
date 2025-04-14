@@ -18,6 +18,7 @@
 *.ico
 *.jpg
 *.png
+*.svg
 *.rake
 *.rb
 *.ru
