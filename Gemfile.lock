@@ -287,7 +287,7 @@ GEM
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
-    rexml (3.4.1)
+    rexml (3.4.4)
     rollbar (3.6.2)
     rouge (4.5.1)
     rspec-core (3.13.3)
