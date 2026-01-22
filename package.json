@@ -16,7 +16,7 @@
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
     "globals": "16.5.0",
-    "prettier": "3.7.3",
+    "prettier": "3.8.0",
     "stylelint": "16.26.1",
     "stylelint-config-standard": "39.0.1",
     "stylelint-config-standard-scss": "16.0.0"
