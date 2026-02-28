@@ -11,7 +11,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@eslint/eslintrc": "3.3.3",
+    "@eslint/eslintrc": "3.3.4",
     "@eslint/js": "10.0.1",
     "eslint": "10.0.2",
     "eslint-config-prettier": "10.1.8",
