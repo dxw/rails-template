@@ -11,7 +11,7 @@ services:
     command: bundle exec rake
     ports:
       - "127.0.0.1:3000:3000"
-      - "::1"
+      - "[::1]:3000:3000"
     depends_on:
       - test-db
     env_file:
