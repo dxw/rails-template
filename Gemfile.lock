@@ -460,7 +460,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 3.4.9p82
+   ruby 3.4.10p104
 
 BUNDLED WITH
    2.4.7
