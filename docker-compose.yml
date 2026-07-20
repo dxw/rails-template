@@ -26,7 +26,7 @@ services:
       - dev
 
   db:
-    image: postgres@sha256:5773fe724c49c42a7a9ca70202e11e1dff21fb7235b335a73f39297d200b73a2
+    image: postgres@sha256:3a82e1f56c8f0f5616a11103ac3d47e632c3938698946a7ad26da0df1334744a
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
