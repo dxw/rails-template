@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Base
 # ------------------------------------------------------------------------------
-FROM ruby:3.4.10@sha256:29925d7cc6a147012d1104bb39baf652aae56bfa27647f401366616654a5e7cd AS base
+FROM ruby:3.4.12@sha256:27125a2b30782f1ec4230d3aaf545d5b167e8beb11da4a11ff5ceeb8cb44a36c AS base
 LABEL org.opencontainers.image.authors="contact@dxw.com"
 
 COPY .node-version .node-version
